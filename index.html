@@ -146,7 +146,19 @@
     .contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
     /* FOOTER */
-    footer { background: var(--bg2); border-top: 1px solid var(--border); text-align: center; padding: 1.8rem 2rem; color: var(--muted); font-size: 0.82rem; }
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      text-align: center; padding: 2rem 2rem 1.8rem;
+      color: var(--muted); font-size: 0.82rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    }
+    .footer-counter {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 14px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .footer-counter span { color: var(--accent); font-weight: 600; font-size: 0.88rem; }
 
     /* RESPONSIVE */
     @media (max-width: 760px) {
@@ -410,7 +422,7 @@
 
     </div>
     <p style="color:var(--muted); font-size:0.87rem; margin-top:1.5rem;">
-      ✏️ <em>To add or update papers, edit the <code>pub-card</code> blocks in this file — or ask your AI assistant to do it for you!</em>
+      ✏️ <em>To add or update papers, edit the <code>pub-card</code> blocks in this file.</em>
     </p>
   </div>
 </section>
@@ -452,7 +464,7 @@
 
     </div>
     <p style="color:var(--muted); font-size:0.87rem; margin-top:2rem;">
-      ✏️ <em>Replace these cards with your real talks, press articles, blog posts, and public lectures. Wrap each card in <code>&lt;a href="..."&gt;</code> to make them link out.</em>
+      ✏️ <em>Replace these cards with your real talks, press articles, blog posts, and public lectures.</em>
     </p>
   </div>
 </section>
@@ -507,11 +519,20 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <p>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden &nbsp;&middot;&nbsp; Built with &hearts; on GitHub Pages</p>
+  <div class="footer-counter">
+    👁️&nbsp;Page visits:&nbsp;
+    <span id="visit-count">...</span>
+  </div>
+  <noscript>
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&count_bg=%235b8dee&title_bg=%231c2333&icon=eye&icon_color=%23dce6f5&title=visits&edge_flat=true" alt="visit counter" style="height:20px;border-radius:4px;">
+  </noscript>
 </footer>
 
 <script>
+  /* ---- Navigation ---- */
   function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
   function closeNav()  { document.getElementById('navLinks').classList.remove('open'); }
   const sections = document.querySelectorAll('section[id]');
@@ -521,6 +542,19 @@
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
     links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
   });
+
+  /* ---- Visit counter via hits.seeyoufarm.com (JSON API) ---- */
+  fetch('https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&format=json')
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('visit-count').textContent =
+        Number(d.total_count).toLocaleString();
+    })
+    .catch(() => {
+      // Fallback: render the badge image if JSON call fails
+      const el = document.getElementById('visit-count');
+      el.innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&count_bg=%235b8dee&title_bg=%231c2333&icon=eye&icon_color=%23dce6f5&title=visits&edge_flat=true" alt="visits" style="height:18px;border-radius:4px;vertical-align:middle;">';
+    });
 </script>
 
 </body>
