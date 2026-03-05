@@ -4,211 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Albertas Dvirnas – Researcher</title>
-  <meta name="description" content="Albertas Dvirnas — researcher in biophysics, optical DNA mapping, and computational single-molecule analysis at Umeå University.">
+  <meta name="description" content="Albertas Dvirnas — postdoctoral researcher in optical DNA mapping, biophysics, and computational genomics at Umeå University, Sweden.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #0f1117;
-      --bg2:       #141922;
-      --card:      #1c2333;
-      --accent:    #5b8dee;
-      --accent2:   #7c5cbf;
-      --green:     #38d39f;
-      --orange:    #f7971e;
-      --text:      #dce6f5;
-      --muted:     #7a90b0;
-      --border:    rgba(255,255,255,0.07);
-      --radius:    12px;
-      --shadow:    0 4px 24px rgba(0,0,0,0.4);
+      --bg:     #0f1117;
+      --bg2:    #141922;
+      --card:   #1c2333;
+      --accent: #5b8dee;
+      --acc2:   #7c5cbf;
+      --green:  #38d39f;
+      --orange: #f7971e;
+      --text:   #dce6f5;
+      --muted:  #7a90b0;
+      --border: rgba(255,255,255,0.07);
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    /* ─── NAV ──────────────────────────────────────────────── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(15,17,23,0.88);
-      backdrop-filter: blur(16px);
+      background: rgba(15,17,23,0.88); backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      height: 58px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem;
+      height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem;
     }
-    .nav-name {
-      font-weight: 700; font-size: 1rem;
-      background: linear-gradient(120deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.01em;
-    }
+    .nav-name { font-weight: 700; font-size: 1rem; background: linear-gradient(120deg, var(--accent), var(--acc2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none;
-      font-size: 0.88rem; font-weight: 500;
-      transition: color 0.2s;
-    }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
 
-    /* ─── HERO ─────────────────────────────────────────────── */
+    /* HERO */
     #home {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 80px 2rem 4rem;
-      background:
-        radial-gradient(ellipse at 65% 35%, rgba(91,141,238,0.10) 0%, transparent 55%),
-        radial-gradient(ellipse at 15% 75%, rgba(124,92,191,0.09) 0%, transparent 50%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 2rem 4rem;
+      background: radial-gradient(ellipse at 65% 35%, rgba(91,141,238,0.10) 0%, transparent 55%),
+                  radial-gradient(ellipse at 15% 75%, rgba(124,92,191,0.09) 0%, transparent 50%);
     }
-    .hero-inner {
-      max-width: 980px; width: 100%;
-      display: grid; grid-template-columns: 1fr 280px; gap: 4rem; align-items: center;
-    }
+    .hero-inner { max-width: 980px; width: 100%; display: grid; grid-template-columns: 1fr 280px; gap: 4rem; align-items: center; }
     .hero-badge {
-      display: inline-block;
-      background: rgba(91,141,238,0.14); border: 1px solid rgba(91,141,238,0.28);
+      display: inline-block; background: rgba(91,141,238,0.14); border: 1px solid rgba(91,141,238,0.28);
       color: var(--accent); padding: 4px 14px; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em;
-      text-transform: uppercase; margin-bottom: 1.4rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 1.4rem;
     }
-    .hero-title {
-      font-family: 'Lora', serif;
-      font-size: clamp(2.6rem, 5.5vw, 3.8rem);
-      font-weight: 600; line-height: 1.1;
-      margin-bottom: 1.2rem;
-    }
-    .hero-title span {
-      background: linear-gradient(120deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
+    .hero-title { font-family: 'Lora', serif; font-size: clamp(2.6rem, 5.5vw, 3.8rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.2rem; }
+    .hero-title span { background: linear-gradient(120deg, var(--accent), var(--acc2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-desc { color: var(--muted); font-size: 1.05rem; max-width: 500px; margin-bottom: 2rem; }
     .btn-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-    .btn {
-      padding: 10px 22px; border-radius: 8px;
-      font-size: 0.88rem; font-weight: 600;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-      transition: all 0.2s; cursor: pointer;
-    }
-    .btn-primary {
-      background: linear-gradient(120deg, var(--accent), var(--accent2));
-      color: #fff; border: none;
-    }
+    .btn { padding: 10px 22px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn-primary { background: linear-gradient(120deg, var(--accent), var(--acc2)); color: #fff; border: none; }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-outline {
-      background: transparent; border: 1px solid rgba(255,255,255,0.12);
-      color: var(--text);
-    }
+    .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-
     .hero-photo-wrap { display: flex; justify-content: center; }
     .hero-photo {
-      width: 240px; height: 240px;
-      border-radius: 50%; object-fit: cover;
+      width: 240px; height: 240px; border-radius: 50%; object-fit: cover;
       border: 3px solid transparent;
-      background:
-        linear-gradient(var(--bg), var(--bg)) padding-box,
-        linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+      background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(135deg, var(--accent), var(--acc2)) border-box;
       box-shadow: 0 0 70px rgba(91,141,238,0.25), var(--shadow);
     }
 
-    /* ─── SHARED SECTION STYLES ────────────────────────────── */
+    /* SHARED */
     section { padding: 6rem 2rem; }
     .container { max-width: 980px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
-    }
-    .section-title {
-      font-family: 'Lora', serif;
-      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
-      font-weight: 600; margin-bottom: 0.8rem;
-    }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Lora', serif; font-size: clamp(1.75rem, 3.5vw, 2.4rem); font-weight: 600; margin-bottom: 0.8rem; }
     .section-desc { color: var(--muted); font-size: 0.97rem; max-width: 580px; margin-bottom: 2.8rem; }
 
-    /* ─── ABOUT ────────────────────────────────────────────── */
+    /* ABOUT */
     #about { background: var(--bg2); }
     .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start; }
     .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
     .about-text strong { color: var(--text); }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
-    .tag {
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--muted); padding: 4px 13px; border-radius: 100px;
-      font-size: 0.78rem; font-weight: 500;
-    }
+    .tag { background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: 4px 13px; border-radius: 100px; font-size: 0.78rem; font-weight: 500; }
     .info-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
-    .info-list li {
-      display: flex; gap: 1rem; align-items: center;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 0.9rem 1.2rem;
-    }
+    .info-list li { display: flex; gap: 1rem; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.2rem; }
     .info-icon { font-size: 1.3rem; flex-shrink: 0; }
     .info-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 2px; letter-spacing: 0.04em; }
     .info-val { font-weight: 500; font-size: 0.88rem; }
     .info-val a { color: var(--accent); text-decoration: none; }
 
-    /* ─── PROJECTS ─────────────────────────────────────────── */
+    /* PROJECTS */
     #projects { background: var(--bg); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1.3rem; }
-    .project-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.4rem;
-      text-decoration: none; color: inherit; display: block;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-decoration: none; color: inherit; display: block; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
     .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
     .proj-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
     .proj-icon { font-size: 1.5rem; }
     .proj-name { font-weight: 600; font-size: 0.97rem; }
     .proj-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.6; margin-bottom: 0.9rem; }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .ptag {
-      background: rgba(91,141,238,0.1); border: 1px solid rgba(91,141,238,0.22);
-      color: var(--accent); padding: 2px 9px; border-radius: 100px; font-size: 0.73rem; font-weight: 500;
-    }
+    .ptag { background: rgba(91,141,238,0.1); border: 1px solid rgba(91,141,238,0.22); color: var(--accent); padding: 2px 9px; border-radius: 100px; font-size: 0.73rem; font-weight: 500; }
 
-    /* ─── PUBLICATIONS ─────────────────────────────────────── */
+    /* PUBLICATIONS */
     #publications { background: var(--bg2); }
     .pub-list { display: flex; flex-direction: column; gap: 1.1rem; }
-    .pub-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.3rem 1.6rem;
-      display: grid; grid-template-columns: 46px 1fr; gap: 1.2rem; align-items: start;
-      transition: border-color 0.2s;
-    }
+    .pub-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.6rem; display: grid; grid-template-columns: 46px 1fr; gap: 1.2rem; align-items: start; transition: border-color 0.2s; }
     .pub-card:hover { border-color: var(--accent); }
+    .pub-card.thesis { border-left: 3px solid var(--acc2); }
     .pub-year { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 3px; }
     .pub-title { font-weight: 600; font-size: 0.94rem; margin-bottom: 0.25rem; }
     .pub-authors { color: var(--muted); font-size: 0.83rem; font-style: italic; margin-bottom: 0.25rem; }
     .pub-journal { color: var(--accent); font-size: 0.83rem; font-weight: 500; }
     .pub-links { margin-top: 0.55rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .pub-link {
-      color: var(--muted); text-decoration: none; font-size: 0.78rem;
-      display: inline-flex; align-items: center; gap: 3px;
-      transition: color 0.2s;
-    }
-    .pub-link:hover { color: var(--accent); }
-    .pub-note { color: var(--muted); font-size: 0.85rem; font-style: italic; margin-top: 1.5rem; }
+    .pub-link { color: var(--muted); text-decoration: none; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 3px; transition: color 0.2s; border: 1px solid var(--border); padding: 2px 10px; border-radius: 6px; }
+    .pub-link:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* ─── POPULAR SCIENCE ──────────────────────────────────── */
+    /* POPULAR SCIENCE */
     #popular-science { background: var(--bg); }
     .ps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.3rem; }
-    .ps-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
+    .ps-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
     .ps-card:hover { border-color: var(--accent); transform: translateY(-3px); }
     .ps-stripe { height: 4px; }
     .ps-body { padding: 1.3rem; }
@@ -216,46 +128,27 @@
     .ps-title { font-weight: 600; font-size: 0.94rem; margin-bottom: 0.45rem; }
     .ps-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
 
-    /* ─── TEACHING ─────────────────────────────────────────── */
+    /* TEACHING */
     #teaching { background: var(--bg2); }
     .teaching-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.3rem; }
-    .course-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.4rem;
-      transition: border-color 0.2s;
-    }
+    .course-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; transition: border-color 0.2s; }
     .course-card:hover { border-color: var(--green); }
     .course-num { font-size: 0.72rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
     .course-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.45rem; }
     .course-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
     .course-meta { margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
-    /* ─── CONTACT ──────────────────────────────────────────── */
-    #contact {
-      background: var(--bg);
-      background-image: radial-gradient(ellipse at 50% 100%, rgba(91,141,238,0.08) 0%, transparent 60%);
-      text-align: center;
-    }
+    /* CONTACT */
+    #contact { background: var(--bg); background-image: radial-gradient(ellipse at 50% 100%, rgba(91,141,238,0.08) 0%, transparent 60%); text-align: center; }
     #contact .section-desc { margin-left: auto; margin-right: auto; }
     .contact-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-    .contact-card {
-      display: flex; align-items: center; gap: 0.6rem;
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--muted); padding: 12px 20px; border-radius: var(--radius);
-      text-decoration: none; font-size: 0.88rem; font-weight: 500;
-      transition: all 0.2s;
-    }
+    .contact-card { display: flex; align-items: center; gap: 0.6rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: 12px 20px; border-radius: var(--radius); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
     .contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    /* ─── FOOTER ───────────────────────────────────────────── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      text-align: center; padding: 1.8rem 2rem;
-      color: var(--muted); font-size: 0.82rem;
-    }
+    /* FOOTER */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); text-align: center; padding: 1.8rem 2rem; color: var(--muted); font-size: 0.82rem; }
 
-    /* ─── RESPONSIVE ───────────────────────────────────────── */
+    /* RESPONSIVE */
     @media (max-width: 760px) {
       nav { padding: 0 1.2rem; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: rgba(15,17,23,0.97); padding: 1rem 1.5rem 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
@@ -273,37 +166,38 @@
 </head>
 <body>
 
-<!-- ═══════════════ NAV ═══════════════ -->
+<!-- NAV -->
 <nav>
   <div class="nav-name">Albertas Dvirnas</div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about"          onclick="closeNav()">About</a></li>
-    <li><a href="#projects"       onclick="closeNav()">Projects</a></li>
-    <li><a href="#publications"   onclick="closeNav()">Publications</a></li>
+    <li><a href="#about"           onclick="closeNav()">About</a></li>
+    <li><a href="#projects"        onclick="closeNav()">Projects</a></li>
+    <li><a href="#publications"    onclick="closeNav()">Publications</a></li>
     <li><a href="#popular-science" onclick="closeNav()">Popular Science</a></li>
-    <li><a href="#teaching"       onclick="closeNav()">Teaching</a></li>
-    <li><a href="#contact"        onclick="closeNav()">Contact</a></li>
+    <li><a href="#teaching"        onclick="closeNav()">Teaching</a></li>
+    <li><a href="#contact"         onclick="closeNav()">Contact</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- ═══════════════ HERO ═══════════════ -->
+<!-- HERO -->
 <section id="home">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge">Biophysics · Computational Biology · DNA Mapping</div>
+      <div class="hero-badge">Postdoctoral Researcher · Optical DNA Mapping · Computational Genomics</div>
       <h1 class="hero-title">Albertas<br><span>Dvirnas</span></h1>
       <p class="hero-desc">
         I develop algorithms and computational tools for optical DNA mapping,
         super-resolution microscopy, and single-molecule biophysics.
-        Based at Umeå University, Sweden.
+        Postdoc at the Department of Mathematics and Mathematical Statistics,
+        Umeå University, Sweden.
       </p>
       <div class="btn-row">
-        <a href="#publications"   class="btn btn-primary">📄 Publications</a>
-        <a href="#projects"       class="btn btn-outline">🔬 Projects</a>
-        <a href="#contact"        class="btn btn-outline">✉️ Contact</a>
+        <a href="#publications"  class="btn btn-primary">📄 Publications</a>
+        <a href="#projects"      class="btn btn-outline">🔬 Projects</a>
+        <a href="#contact"       class="btn btn-outline">✉️ Contact</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
@@ -312,7 +206,7 @@
   </div>
 </section>
 
-<!-- ═══════════════ ABOUT ═══════════════ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="section-label">About me</div>
@@ -320,26 +214,31 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I am a researcher working at the intersection of <strong>biophysics, computational data analysis,
-          and single-molecule imaging</strong>. My work focuses on developing algorithms and software tools
-          that extract meaningful biological information from complex optical measurements.
+          I am a postdoctoral researcher at the <strong>Department of Mathematics and Mathematical
+          Statistics, Umeå University</strong>, working at the intersection of biophysics,
+          computational data analysis, and single-molecule imaging.
         </p>
         <p>
-          My primary research area is <strong>Optical DNA Mapping (ODM)</strong> — a technique that
-          stretches individual DNA molecules in nanochannels and images sequence-specific fluorescent
-          patterns, enabling fast genome assembly and structural variant detection without full sequencing.
+          My primary research area is <strong>Optical DNA Mapping (ODM)</strong> — a technique
+          that stretches individual DNA molecules in nanochannels and images sequence-specific
+          fluorescent patterns, enabling genome assembly and structural variant detection
+          without full sequencing. I develop the algorithms that turn raw microscopy images
+          into biological insight.
         </p>
         <p>
-          I am passionate about bridging the gap between wet-lab experiments and rigorous
-          mathematical and computational analysis — turning raw microscopy images into biological insight.
+          I completed my <strong>PhD at Lund University</strong> (2022) under the supervision of
+          Prof. Tobias Ambjörnsson in the Computational Biology and Biological Physics group.
+          My thesis covered six papers on barcode analysis methods for optical DNA mapping.
         </p>
         <div class="tags">
           <span class="tag">Optical DNA Mapping</span>
-          <span class="tag">Super-resolution Microscopy</span>
-          <span class="tag">Biophysics</span>
-          <span class="tag">Signal Processing</span>
-          <span class="tag">Algorithm Design</span>
           <span class="tag">Genome Assembly</span>
+          <span class="tag">Super-resolution Microscopy</span>
+          <span class="tag">Hidden Markov Models</span>
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Structural Variation Detection</span>
+          <span class="tag">Biophysics</span>
+          <span class="tag">Algorithm Design</span>
           <span class="tag">MATLAB</span>
           <span class="tag">Python</span>
           <span class="tag">Statistical Physics</span>
@@ -350,8 +249,15 @@
           <li>
             <span class="info-icon">🏛️</span>
             <div>
-              <div class="info-label">Affiliation</div>
-              <div class="info-val">Umeå University, Sweden</div>
+              <div class="info-label">Current position</div>
+              <div class="info-val">Postdoctoral Researcher, Umeå University</div>
+            </div>
+          </li>
+          <li>
+            <span class="info-icon">🎓</span>
+            <div>
+              <div class="info-label">PhD</div>
+              <div class="info-val">Lund University, 2022 &mdash; Comp. Biology &amp; Biophysics</div>
             </div>
           </li>
           <li>
@@ -381,13 +287,19 @@
   </div>
 </section>
 
-<!-- ═══════════════ PROJECTS ═══════════════ -->
+<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="section-label">Research &amp; Software</div>
     <h2 class="section-title">Projects</h2>
     <p class="section-desc">Open-source computational tools and research software for single-molecule analysis, biophysics, and genomics.</p>
     <div class="projects-grid">
+
+      <a href="https://github.com/dnadevcode/dogma" class="project-card">
+        <div class="proj-header"><span class="proj-icon">🧬</span><span class="proj-name">DOGMA</span></div>
+        <p class="proj-desc">De novo assembly of densely labelled optical DNA maps using a matrix profile approach. Assembles DNA intensity barcodes into genome-scale maps without a reference sequence.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Genome Assembly</span><span class="ptag">Matrix Profile</span><span class="ptag">ODM</span></div>
+      </a>
 
       <a href="https://github.com/albertasdvirnas/emccd-pia" class="project-card">
         <div class="proj-header"><span class="proj-icon">📷</span><span class="proj-name">EMCCD-PIA</span></div>
@@ -396,21 +308,21 @@
       </a>
 
       <a href="https://github.com/albertasdvirnas/hpfl-odm" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🧬</span><span class="proj-name">HPFL-ODM</span></div>
+        <div class="proj-header"><span class="proj-icon">🎯</span><span class="proj-name">HPFL-ODM</span></div>
         <p class="proj-desc">High-precision fluorophore localization in nanochannel-based optical DNA mapping — algorithms for sub-diffraction position estimation.</p>
         <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">DNA Mapping</span><span class="ptag">Localization</span></div>
       </a>
 
       <a href="https://github.com/albertasdvirnas/sfwmatlab" class="project-card">
         <div class="proj-header"><span class="proj-icon">🔬</span><span class="proj-name">SFW-Matlab</span></div>
-        <p class="proj-desc">MATLAB implementation of the Sliding Frank–Wolfe algorithm for super-resolution microscopy and sparse signal reconstruction.</p>
+        <p class="proj-desc">MATLAB implementation of the Sliding Frank–Wolfe algorithm for super-resolution microscopy and sparse signal reconstruction from ODM barcodes.</p>
         <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Super-resolution</span><span class="ptag">Optimisation</span></div>
       </a>
 
       <a href="https://github.com/albertasdvirnas/dtw_matlab" class="project-card">
         <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-name">DTW-Matlab</span></div>
-        <p class="proj-desc">MEX-compiled MATLAB interface to the Trillion DTW algorithm for ultra-fast dynamic time warping on DNA barcode sequences.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">C++</span><span class="ptag">Dynamic Time Warping</span><span class="ptag">DNA</span></div>
+        <p class="proj-desc">MEX-compiled MATLAB interface to the Trillion DTW algorithm for ultra-fast dynamic time warping — used for DNA barcode sequence alignment.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">C++</span><span class="ptag">Dynamic Time Warping</span></div>
       </a>
 
       <a href="https://github.com/albertasdvirnas/mcmd_wang_landau_sampling" class="project-card">
@@ -419,76 +331,96 @@
         <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Monte Carlo</span><span class="ptag">Statistical Physics</span></div>
       </a>
 
-      <a href="https://github.com/albertasdvirnas/awesome-communication" class="project-card">
-        <div class="proj-header"><span class="proj-icon">📡</span><span class="proj-name">Awesome Communication</span></div>
-        <p class="proj-desc">A curated list of science communication resources — papers, guides, and books to help researchers communicate their work to the public.</p>
-        <div class="proj-tags"><span class="ptag">Science Comm.</span><span class="ptag">Curated List</span></div>
-      </a>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ PUBLICATIONS ═══════════════ -->
+<!-- PUBLICATIONS -->
 <section id="publications">
   <div class="container">
     <div class="section-label">Peer-reviewed work</div>
     <h2 class="section-title">Publications</h2>
-    <p class="section-desc">Research articles in biophysics, computational biology, and single-molecule imaging.</p>
+    <p class="section-desc">
+      Research articles in computational biology, optical DNA mapping, and biophysics.
+      Full list on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en" style="color:var(--accent);">Google Scholar</a>.
+    </p>
     <div class="pub-list">
 
-      <!-- ✏️ Replace each card with your real papers. Keep the same structure. -->
       <div class="pub-card">
-        <div class="pub-year">2024</div>
+        <div class="pub-year">2025</div>
         <div>
-          <div class="pub-title">High-precision fluorophore localization in nanochannel-based optical DNA mapping</div>
-          <div class="pub-authors">Albertas Dvirnas, et al.</div>
-          <div class="pub-journal">Add journal name &amp; DOI here</div>
+          <div class="pub-title">DOGMA: de novo assembly of densely labelled optical DNA maps using a matrix profile approach</div>
+          <div class="pub-authors">Dvirnas A, Leal-Garza LM, Abbaspour Z, Fröbrant E, Frykholm K, Wrande M, et al.</div>
+          <div class="pub-journal">PLOS ONE 20(12): e0335633</div>
           <div class="pub-links">
-            <a href="#" class="pub-link">📄 PDF</a>
-            <a href="#" class="pub-link">🔗 DOI</a>
-            <a href="https://github.com/albertasdvirnas/hpfl-odm" class="pub-link">💻 Code</a>
+            <a href="https://doi.org/10.1371/journal.pone.0335633" class="pub-link">🔗 DOI</a>
+            <a href="https://github.com/dnadevcode/dogma" class="pub-link">💻 Code</a>
           </div>
         </div>
       </div>
 
       <div class="pub-card">
-        <div class="pub-year">2024</div>
+        <div class="pub-year">2021</div>
         <div>
-          <div class="pub-title">Sequence alignment algorithms for optical DNA mapping</div>
-          <div class="pub-authors">Albertas Dvirnas, et al.</div>
-          <div class="pub-journal">Add journal name &amp; DOI here</div>
+          <div class="pub-title">Detection of structural variations in densely-labelled optical DNA barcodes: A hidden Markov model approach</div>
+          <div class="pub-authors">Dvirnas A, Stewart C, Müller V, et al.</div>
+          <div class="pub-journal">PLOS ONE</div>
           <div class="pub-links">
-            <a href="#" class="pub-link">📄 PDF</a>
-            <a href="#" class="pub-link">🔗 DOI</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/34739528/" class="pub-link">🔗 PubMed</a>
           </div>
         </div>
       </div>
 
       <div class="pub-card">
-        <div class="pub-year">2023</div>
+        <div class="pub-year">2019</div>
         <div>
-          <div class="pub-title">De novo genome assembly from nanochannel optical DNA maps</div>
-          <div class="pub-authors">Albertas Dvirnas, et al.</div>
-          <div class="pub-journal">Add journal name &amp; DOI here</div>
+          <div class="pub-title">Enzyme-free optical DNA mapping of the human genome using competitive binding</div>
+          <div class="pub-authors">Dvirnas A, et al.</div>
+          <div class="pub-journal">Nucleic Acids Research, 47(15): e89</div>
           <div class="pub-links">
-            <a href="#" class="pub-link">📄 PDF</a>
-            <a href="#" class="pub-link">🔗 DOI</a>
+            <a href="https://doi.org/10.1093/nar/gkz489" class="pub-link">🔗 DOI</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31165870/" class="pub-link">🔗 PubMed</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-year">2019</div>
+        <div>
+          <div class="pub-title">Optical DNA Mapping Combined with Cas9-Targeted Resistance Gene Identification for Rapid Tracking of Resistance Plasmids in a Neonatal Intensive Care Unit Outbreak</div>
+          <div class="pub-authors">Dvirnas A, et al.</div>
+          <div class="pub-journal">mBio / ASM Journals</div>
+          <div class="pub-links">
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31289171/" class="pub-link">🔗 PubMed</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card thesis">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">Methods for barcode analysis in optical DNA mapping <span style="font-size:0.78rem; color:var(--acc2); font-weight:600; font-style:normal;">[PhD Thesis]</span></div>
+          <div class="pub-authors">Dvirnas A</div>
+          <div class="pub-journal">Lund University &nbsp;·&nbsp; ISBN: 978-91-8039-125-2 &nbsp;·&nbsp; Defended 25 Jan 2022</div>
+          <div class="pub-links">
+            <a href="https://portal.research.lu.se/files/110913095/Albertas_Dvirnas_WEBB.pdf" class="pub-link">📄 PDF</a>
           </div>
         </div>
       </div>
 
     </div>
-    <p class="pub-note">✏️ <em>Update the cards above with your actual paper titles, authors, journals, and DOI links.</em></p>
+    <p style="color:var(--muted); font-size:0.87rem; margin-top:1.5rem;">
+      ✏️ <em>To add or update papers, edit the <code>pub-card</code> blocks in this file — or ask your AI assistant to do it for you!</em>
+    </p>
   </div>
 </section>
 
-<!-- ═══════════════ POPULAR SCIENCE ═══════════════ -->
+<!-- POPULAR SCIENCE -->
 <section id="popular-science">
   <div class="container">
     <div class="section-label">Outreach</div>
     <h2 class="section-title">Popular Science</h2>
-    <p class="section-desc">Making research accessible — articles, talks, podcasts, and other outreach activities for a broader audience.</p>
+    <p class="section-desc">Making research accessible — talks, articles, and other outreach activities for a broader audience.</p>
     <div class="ps-grid">
 
       <div class="ps-card">
@@ -496,7 +428,7 @@
         <div class="ps-body">
           <div class="ps-type">🎙️ Talk</div>
           <div class="ps-title">Reading DNA with light: nanochannel optical mapping explained</div>
-          <div class="ps-desc">A layperson introduction to how we can image the genetic code of an organism using fluorescent light and nanochannel devices.</div>
+          <div class="ps-desc">A layperson introduction to how we image genetic information using fluorescent light and nanofluidic channels — without expensive sequencing.</div>
         </div>
       </div>
 
@@ -505,7 +437,7 @@
         <div class="ps-body">
           <div class="ps-type">✍️ Article</div>
           <div class="ps-title">Why super-resolution microscopy changed everything</div>
-          <div class="ps-desc">How breaking the diffraction limit of light opened up a new world of nanoscale biology — and what it means for medicine and genomics.</div>
+          <div class="ps-desc">How breaking the diffraction limit of light opened up a new world of nanoscale biology — and what it means for genomics and medicine.</div>
         </div>
       </div>
 
@@ -520,23 +452,23 @@
 
     </div>
     <p style="color:var(--muted); font-size:0.87rem; margin-top:2rem;">
-      ✏️ <em>Replace cards above with your real talks, press articles, blog posts, podcasts, and public lectures.</em>
+      ✏️ <em>Replace these cards with your real talks, press articles, blog posts, and public lectures. Wrap each card in <code>&lt;a href="..."&gt;</code> to make them link out.</em>
     </p>
   </div>
 </section>
 
-<!-- ═══════════════ TEACHING ═══════════════ -->
+<!-- TEACHING -->
 <section id="teaching">
   <div class="container">
     <div class="section-label">Education</div>
     <h2 class="section-title">Teaching</h2>
-    <p class="section-desc">Courses and supervision at Umeå University. Replace placeholders with your actual courses, roles, and years.</p>
+    <p class="section-desc">Courses and supervision at Umeå University. Update with your actual course codes, roles, and years.</p>
     <div class="teaching-grid">
 
       <div class="course-card">
         <div class="course-num">Course · Umeå University</div>
         <div class="course-name">Biophysics</div>
-        <div class="course-desc">Physical principles behind biological systems — from single-molecule mechanics to membrane biophysics and cell motility.</div>
+        <div class="course-desc">Physical principles behind biological systems — from single-molecule mechanics and polymer physics to membrane biophysics.</div>
         <div class="course-meta"><span class="tag">Undergraduate</span><span class="tag">Lecturer / TA</span></div>
       </div>
 
@@ -550,7 +482,7 @@
       <div class="course-card">
         <div class="course-num">Supervision</div>
         <div class="course-name">Student Thesis Projects</div>
-        <div class="course-desc">Supervision of bachelor's and master's theses in computational biology and biophysics. Open to new thesis students — contact me!</div>
+        <div class="course-desc">Supervision of bachelor’s and master’s theses in computational biology and biophysics. Open to new thesis students — reach out!</div>
         <div class="course-meta"><span class="tag">BSc · MSc</span><span class="tag">Open positions</span></div>
       </div>
 
@@ -558,45 +490,36 @@
   </div>
 </section>
 
-<!-- ═══════════════ CONTACT ═══════════════ -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="section-label">Get in touch</div>
     <h2 class="section-title">Contact</h2>
     <p class="section-desc">
-      Reach out for collaborations, questions about my research, thesis supervision inquiries,
-      or just to say hello!
+      Reach out for collaborations, questions about my research, thesis supervision, or just to say hello!
     </p>
     <div class="contact-grid">
-      <a href="mailto:albertas.dvirnas@umu.se" class="contact-card">✉️ Email me</a>
-      <a href="https://github.com/albertasdvirnas" class="contact-card">💻 GitHub</a>
-      <a href="https://scholar.google.com/scholar?q=Albertas+Dvirnas" class="contact-card">🎓 Google Scholar</a>
-      <a href="https://www.umu.se/en/" class="contact-card">🏛️ Umeå University</a>
+      <a href="mailto:albertas.dvirnas@umu.se"                                       class="contact-card">✉️ albertas.dvirnas@umu.se</a>
+      <a href="https://github.com/albertasdvirnas"                                    class="contact-card">💻 GitHub</a>
+      <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en"      class="contact-card">🎓 Google Scholar</a>
+      <a href="https://www.umu.se/en/staff/albertas-dvirnas/"                          class="contact-card">🏛️ Umeå University</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <p>© 2026 Albertas Dvirnas &nbsp;·&nbsp; Umeå, Sweden &nbsp;·&nbsp; Built with ❤️ on GitHub Pages</p>
+  <p>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden &nbsp;&middot;&nbsp; Built with &hearts; on GitHub Pages</p>
 </footer>
 
 <script>
-  function toggleNav() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  function closeNav() {
-    document.getElementById('navLinks').classList.remove('open');
-  }
-  // Highlight active nav link on scroll
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  function closeNav()  { document.getElementById('navLinks').classList.remove('open'); }
   const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
+  const links    = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let cur = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
-    links.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : '';
-    });
+    links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
   });
 </script>
 
