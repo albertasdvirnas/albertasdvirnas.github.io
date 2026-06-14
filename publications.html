@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications – Albertas Dvirnas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root, [data-theme="dark"] {
+      --bg:#0f1117;--bg2:#141922;--card:#1c2333;--accent:#5b8dee;--acc2:#7c5cbf;
+      --text:#dce6f5;--muted:#7a90b0;--border:rgba(255,255,255,0.07);
+      --nav-bg:rgba(15,17,23,0.88);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);
+    }
+    [data-theme="light"] {
+      --bg:#f5f7fb;--bg2:#edf0f6;--card:#ffffff;--accent:#3b6fd4;--acc2:#6840b0;
+      --text:#1a2235;--muted:#5a6a85;--border:rgba(0,0,0,0.09);
+      --nav-bg:rgba(245,247,251,0.92);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;transition:background 0.3s,color 0.3s;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;}
+    .nav-name{font-weight:700;font-size:1rem;background:linear-gradient(120deg,var(--accent),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--text);}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .theme-toggle{cursor:pointer;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:5px;transition:border-color 0.2s,color 0.2s;white-space:nowrap;}
+    .theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+    .page-hero{padding:7rem 2rem 3rem;background:radial-gradient(ellipse at 65% 35%,rgba(91,141,238,0.10) 0%,transparent 55%);}
+    .container{max-width:980px;margin:0 auto;}
+    .section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+    .section-title{font-family:'Lora',serif;font-size:clamp(1.75rem,3.5vw,2.4rem);font-weight:600;margin-bottom:0.8rem;}
+    .section-desc{color:var(--muted);font-size:0.97rem;max-width:580px;margin-bottom:2.8rem;}
+    .pub-list{display:flex;flex-direction:column;gap:1.1rem;}
+    .pub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem 1.6rem;display:grid;grid-template-columns:46px 1fr;gap:1.2rem;align-items:start;transition:border-color 0.2s;}
+    .pub-card:hover{border-color:var(--accent);}
+    .pub-card.thesis{border-left:3px solid var(--acc2);}
+    .pub-year{font-size:0.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;padding-top:3px;}
+    .pub-title{font-weight:600;font-size:0.94rem;margin-bottom:0.25rem;}
+    .pub-authors{color:var(--muted);font-size:0.83rem;font-style:italic;margin-bottom:0.25rem;}
+    .pub-journal{color:var(--accent);font-size:0.83rem;font-weight:500;}
+    .pub-links{margin-top:0.55rem;display:flex;gap:0.75rem;flex-wrap:wrap;}
+    .pub-link{color:var(--muted);text-decoration:none;font-size:0.78rem;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s;border:1px solid var(--border);padding:2px 10px;border-radius:6px;}
+    .pub-link:hover{color:var(--accent);border-color:var(--accent);}
+    footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;}
+    .back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--muted);text-decoration:none;font-size:0.85rem;margin-bottom:1.5rem;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-name">Albertas Dvirnas</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="popular-science.html">Popular Science</a></li>
+    <li><a href="collabs.html">Collabs</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to home</a>
+    <div class="section-label">Peer-reviewed work</div>
+    <h1 class="section-title">Publications</h1>
+    <p class="section-desc">Research articles in applied mathematics, computational biology, and biophysics. Full list on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&hl=en" style="color:var(--accent);">Google Scholar</a>.</p>
+  </div>
+</div>
+
+<section style="padding:3rem 2rem 5rem;background:var(--bg);">
+  <div class="container">
+    <div class="pub-list">
+
+      <div class="pub-card">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">DOGMA: de novo assembly of densely labelled optical DNA maps using a matrix profile approach</div>
+          <div class="pub-authors">Dvirnas A, Leal-Garza LM, Abbaspour Z, Fröbrant E, Frykholm K, Wrande M, et al.</div>
+          <div class="pub-journal">PLOS ONE 20(12): e0335633</div>
+          <div class="pub-links">
+            <a href="https://doi.org/10.1371/journal.pone.0335633" class="pub-link">🔗 DOI</a>
+            <a href="https://github.com/dnadevcode/dogma" class="pub-link">💻 Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-year">2021</div>
+        <div>
+          <div class="pub-title">Detection of structural variations in densely-labelled optical DNA barcodes: A hidden Markov model approach</div>
+          <div class="pub-authors">Dvirnas A, Stewart C, Müller V, et al.</div>
+          <div class="pub-journal">PLOS ONE</div>
+          <div class="pub-links">
+            <a href="https://pubmed.ncbi.nlm.nih.gov/34739528/" class="pub-link">🔗 PubMed</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-year">2019</div>
+        <div>
+          <div class="pub-title">Enzyme-free optical DNA mapping of the human genome using competitive binding</div>
+          <div class="pub-authors">Dvirnas A, et al.</div>
+          <div class="pub-journal">Nucleic Acids Research, 47(15): e89</div>
+          <div class="pub-links">
+            <a href="https://doi.org/10.1093/nar/gkz489" class="pub-link">🔗 DOI</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31165870/" class="pub-link">🔗 PubMed</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-year">2019</div>
+        <div>
+          <div class="pub-title">Optical DNA Mapping Combined with Cas9-Targeted Resistance Gene Identification for Rapid Tracking of Resistance Plasmids in a Neonatal Intensive Care Unit Outbreak</div>
+          <div class="pub-authors">Dvirnas A, et al.</div>
+          <div class="pub-journal">mBio / ASM Journals</div>
+          <div class="pub-links">
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31289171/" class="pub-link">🔗 PubMed</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card thesis">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">Methods for barcode analysis in optical DNA mapping <span style="font-size:0.78rem;color:var(--acc2);font-weight:600;">[PhD Thesis]</span></div>
+          <div class="pub-authors">Dvirnas A</div>
+          <div class="pub-journal">Lund University &nbsp;·&nbsp; ISBN: 978-91-8039-125-2 &nbsp;·&nbsp; Defended 25 Jan 2022</div>
+          <div class="pub-links">
+            <a href="https://portal.research.lu.se/files/110913095/Albertas_Dvirnas_WEBB.pdf" class="pub-link">📄 PDF</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden</footer>
+
+<script>
+  (function(){const s=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
+  function updateBtn(t){const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';}
+  function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updateBtn(n);}
+  function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+</script>
+</body>
+</html>

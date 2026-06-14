@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
+
+    /* DARK THEME (default) */
+    :root, [data-theme="dark"] {
       --bg:     #0f1117;
       --bg2:    #141922;
       --card:   #1c2333;
@@ -21,25 +23,52 @@
       --text:   #dce6f5;
       --muted:  #7a90b0;
       --border: rgba(255,255,255,0.07);
+      --nav-bg: rgba(15,17,23,0.88);
       --radius: 12px;
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
     }
+
+    /* WHITE / LIGHT THEME */
+    [data-theme="light"] {
+      --bg:     #f5f7fb;
+      --bg2:    #edf0f6;
+      --card:   #ffffff;
+      --accent: #3b6fd4;
+      --acc2:   #6840b0;
+      --green:  #1aaa7a;
+      --orange: #d97706;
+      --text:   #1a2235;
+      --muted:  #5a6a85;
+      --border: rgba(0,0,0,0.09);
+      --nav-bg: rgba(245,247,251,0.92);
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; transition: background 0.3s, color 0.3s; }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(15,17,23,0.88); backdrop-filter: blur(16px);
+      background: var(--nav-bg); backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem;
     }
     .nav-name { font-weight: 700; font-size: 1rem; background: linear-gradient(120deg, var(--accent), var(--acc2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
+    .theme-toggle {
+      cursor: pointer; background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 10px; font-size: 0.8rem; color: var(--muted);
+      display: flex; align-items: center; gap: 5px; transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
 
     /* HERO */
     #home {
@@ -60,7 +89,7 @@
     .btn { padding: 10px 22px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
     .btn-primary { background: linear-gradient(120deg, var(--accent), var(--acc2)); color: #fff; border: none; }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text); }
+    .btn-outline { background: transparent; border: 1px solid rgba(128,128,128,0.25); color: var(--text); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
     .hero-photo-wrap { display: flex; justify-content: center; }
     .hero-photo {
@@ -91,55 +120,22 @@
     .info-val { font-weight: 500; font-size: 0.88rem; }
     .info-val a { color: var(--accent); text-decoration: none; }
 
-    /* PROJECTS */
-    #projects { background: var(--bg); }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1.3rem; }
-    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-decoration: none; color: inherit; display: block; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
-    .proj-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.7rem; }
-    .proj-icon { font-size: 1.5rem; }
-    .proj-name { font-weight: 600; font-size: 0.97rem; }
-    .proj-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.6; margin-bottom: 0.9rem; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .ptag { background: rgba(91,141,238,0.1); border: 1px solid rgba(91,141,238,0.22); color: var(--accent); padding: 2px 9px; border-radius: 100px; font-size: 0.73rem; font-weight: 500; }
-
-    /* PUBLICATIONS */
-    #publications { background: var(--bg2); }
-    .pub-list { display: flex; flex-direction: column; gap: 1.1rem; }
-    .pub-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.6rem; display: grid; grid-template-columns: 46px 1fr; gap: 1.2rem; align-items: start; transition: border-color 0.2s; }
-    .pub-card:hover { border-color: var(--accent); }
-    .pub-card.thesis { border-left: 3px solid var(--acc2); }
-    .pub-year { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 3px; }
-    .pub-title { font-weight: 600; font-size: 0.94rem; margin-bottom: 0.25rem; }
-    .pub-authors { color: var(--muted); font-size: 0.83rem; font-style: italic; margin-bottom: 0.25rem; }
-    .pub-journal { color: var(--accent); font-size: 0.83rem; font-weight: 500; }
-    .pub-links { margin-top: 0.55rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .pub-link { color: var(--muted); text-decoration: none; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 3px; transition: color 0.2s; border: 1px solid var(--border); padding: 2px 10px; border-radius: 6px; }
-    .pub-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    /* POPULAR SCIENCE */
-    #popular-science { background: var(--bg); }
-    .ps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.3rem; }
-    .ps-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
-    .ps-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .ps-stripe { height: 4px; }
-    .ps-body { padding: 1.3rem; }
-    .ps-type { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-    .ps-title { font-weight: 600; font-size: 0.94rem; margin-bottom: 0.45rem; }
-    .ps-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
-
-    /* TEACHING */
-    #teaching { background: var(--bg2); }
-    .teaching-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.3rem; }
-    .course-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; transition: border-color 0.2s; }
-    .course-card:hover { border-color: var(--green); }
-    .course-num { font-size: 0.72rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
-    .course-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.45rem; }
-    .course-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
-    .course-meta { margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    /* NAV CARDS (section shortcuts) */
+    #sections-nav { background: var(--bg); }
+    .nav-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.1rem; }
+    .nav-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.4rem 1.2rem; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      text-align: center; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .nav-card-icon { font-size: 2rem; }
+    .nav-card-label { font-weight: 600; font-size: 0.92rem; color: var(--text); }
+    .nav-card-sub { font-size: 0.78rem; color: var(--muted); }
 
     /* CONTACT */
-    #contact { background: var(--bg); background-image: radial-gradient(ellipse at 50% 100%, rgba(91,141,238,0.08) 0%, transparent 60%); text-align: center; }
+    #contact { background: var(--bg2); background-image: radial-gradient(ellipse at 50% 100%, rgba(91,141,238,0.08) 0%, transparent 60%); text-align: center; }
     #contact .section-desc { margin-left: auto; margin-right: auto; }
     .contact-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
     .contact-card { display: flex; align-items: center; gap: 0.6rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: 12px 20px; border-radius: var(--radius); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.2s; }
@@ -163,7 +159,7 @@
     /* RESPONSIVE */
     @media (max-width: 760px) {
       nav { padding: 0 1.2rem; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: rgba(15,17,23,0.97); padding: 1rem 1.5rem 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--nav-bg); padding: 1rem 1.5rem 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
       .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
@@ -182,15 +178,19 @@
 <nav>
   <div class="nav-name">Albertas Dvirnas</div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about"           onclick="closeNav()">About</a></li>
-    <li><a href="#projects"        onclick="closeNav()">Projects</a></li>
-    <li><a href="#publications"    onclick="closeNav()">Publications</a></li>
-    <li><a href="#popular-science" onclick="closeNav()">Popular Science</a></li>
-    <li><a href="#teaching"        onclick="closeNav()">Teaching</a></li>
-    <li><a href="#contact"         onclick="closeNav()">Contact</a></li>
+    <li><a href="#about"        onclick="closeNav()">About</a></li>
+    <li><a href="projects.html" onclick="closeNav()">Projects</a></li>
+    <li><a href="publications.html" onclick="closeNav()">Publications</a></li>
+    <li><a href="talks.html"    onclick="closeNav()">Talks</a></li>
+    <li><a href="popular-science.html" onclick="closeNav()">Popular Science</a></li>
+    <li><a href="collabs.html"  onclick="closeNav()">Collabs</a></li>
+    <li><a href="#contact"      onclick="closeNav()">Contact</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙 Dark</button>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
@@ -207,9 +207,9 @@
         and Mathematical Statistics, Umeå University, Sweden.
       </p>
       <div class="btn-row">
-        <a href="#publications"  class="btn btn-primary">📄 Publications</a>
-        <a href="#projects"      class="btn btn-outline">🔬 Projects</a>
-        <a href="#contact"       class="btn btn-outline">✉️ Contact</a>
+        <a href="publications.html" class="btn btn-primary">📄 Publications</a>
+        <a href="projects.html"     class="btn btn-outline">🔬 Projects</a>
+        <a href="#contact"          class="btn btn-outline">✉️ Contact</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
@@ -259,212 +259,49 @@
       </div>
       <div>
         <ul class="info-list">
-          <li>
-            <span class="info-icon">🏛️</span>
-            <div>
-              <div class="info-label">Current position</div>
-              <div class="info-val">Postdoctoral Researcher, Umeå University</div>
-            </div>
-          </li>
-          <li>
-            <span class="info-icon">🎓</span>
-            <div>
-              <div class="info-label">PhD</div>
-              <div class="info-val">Lund University, 2022 &mdash; Comp. Biology &amp; Biophysics</div>
-            </div>
-          </li>
-          <li>
-            <span class="info-icon">📈</span>
-            <div>
-              <div class="info-label">Research focus</div>
-              <div class="info-val">Time Series Analysis &amp; Applied Mathematics</div>
-            </div>
-          </li>
-          <li>
-            <span class="info-icon">💻</span>
-            <div>
-              <div class="info-label">GitHub</div>
-              <div class="info-val"><a href="https://github.com/albertasdvirnas">@albertasdvirnas</a></div>
-            </div>
-          </li>
-          <li>
-            <span class="info-icon">📍</span>
-            <div>
-              <div class="info-label">Location</div>
-              <div class="info-val">Umeå, Sweden</div>
-            </div>
-          </li>
+          <li><span class="info-icon">🏛️</span><div><div class="info-label">Current position</div><div class="info-val">Postdoctoral Researcher, Umeå University</div></div></li>
+          <li><span class="info-icon">🎓</span><div><div class="info-label">PhD</div><div class="info-val">Lund University, 2022 &mdash; Comp. Biology &amp; Biophysics</div></div></li>
+          <li><span class="info-icon">📈</span><div><div class="info-label">Research focus</div><div class="info-val">Time Series Analysis &amp; Applied Mathematics</div></div></li>
+          <li><span class="info-icon">💻</span><div><div class="info-label">GitHub</div><div class="info-val"><a href="https://github.com/albertasdvirnas">@albertasdvirnas</a></div></div></li>
+          <li><span class="info-icon">🤝</span><div><div class="info-label">EF Modeling Lab</div><div class="info-val"><a href="https://github.com/efmodeling">@efmodeling</a></div></div></li>
+          <li><span class="info-icon">📍</span><div><div class="info-label">Location</div><div class="info-val">Umeå, Sweden</div></div></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
+<!-- SECTION NAVIGATION CARDS -->
+<section id="sections-nav">
   <div class="container">
-    <div class="section-label">Research &amp; Software</div>
-    <h2 class="section-title">Projects</h2>
-    <p class="section-desc">Open-source computational tools and research software for time series analysis, single-molecule imaging, and scientific computing.</p>
-    <div class="projects-grid">
-
-      <a href="https://github.com/dnadevcode/dogma" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🧬</span><span class="proj-name">DOGMA</span></div>
-        <p class="proj-desc">De novo assembly of densely labelled optical DNA maps using a matrix profile approach. Assembles DNA intensity barcodes into genome-scale maps without a reference sequence.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Genome Assembly</span><span class="ptag">Matrix Profile</span><span class="ptag">Time Series</span></div>
+    <div class="section-label">Explore</div>
+    <h2 class="section-title">Site Sections</h2>
+    <div class="nav-cards">
+      <a href="projects.html" class="nav-card">
+        <span class="nav-card-icon">🔬</span>
+        <span class="nav-card-label">Projects</span>
+        <span class="nav-card-sub">Research software &amp; tools</span>
       </a>
-
-      <a href="https://github.com/albertasdvirnas/emccd-pia" class="project-card">
-        <div class="proj-header"><span class="proj-icon">📷</span><span class="proj-name">EMCCD-PIA</span></div>
-        <p class="proj-desc">Photon-optimal image analysis pipeline for EMCCD cameras used in single-molecule fluorescence microscopy experiments.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Microscopy</span><span class="ptag">Image Analysis</span></div>
+      <a href="publications.html" class="nav-card">
+        <span class="nav-card-icon">📄</span>
+        <span class="nav-card-label">Publications</span>
+        <span class="nav-card-sub">Peer-reviewed articles</span>
       </a>
-
-      <a href="https://github.com/albertasdvirnas/hpfl-odm" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🎯</span><span class="proj-name">HPFL-ODM</span></div>
-        <p class="proj-desc">High-precision fluorophore localization in nanochannel-based optical DNA mapping — algorithms for sub-diffraction position estimation.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">DNA Mapping</span><span class="ptag">Localization</span></div>
+      <a href="talks.html" class="nav-card">
+        <span class="nav-card-icon">🎤</span>
+        <span class="nav-card-label">Talks</span>
+        <span class="nav-card-sub">Conferences &amp; seminars</span>
       </a>
-
-      <a href="https://github.com/albertasdvirnas/sfwmatlab" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🔬</span><span class="proj-name">SFW-Matlab</span></div>
-        <p class="proj-desc">MATLAB implementation of the Sliding Frank–Wolfe algorithm for super-resolution microscopy and sparse signal reconstruction from ODM barcodes.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Super-resolution</span><span class="ptag">Optimisation</span></div>
+      <a href="popular-science.html" class="nav-card">
+        <span class="nav-card-icon">🌍</span>
+        <span class="nav-card-label">Popular Science</span>
+        <span class="nav-card-sub">Outreach &amp; articles</span>
       </a>
-
-      <a href="https://github.com/albertasdvirnas/dtw_matlab" class="project-card">
-        <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-name">DTW-Matlab</span></div>
-        <p class="proj-desc">MEX-compiled MATLAB interface to the Trillion DTW algorithm for ultra-fast dynamic time warping — a key tool for time series similarity and DNA barcode alignment.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">C++</span><span class="ptag">Dynamic Time Warping</span><span class="ptag">Time Series</span></div>
+      <a href="collabs.html" class="nav-card">
+        <span class="nav-card-icon">🤝</span>
+        <span class="nav-card-label">Collaborations</span>
+        <span class="nav-card-sub">Groups &amp; partners</span>
       </a>
-
-      <a href="https://github.com/albertasdvirnas/mcmd_wang_landau_sampling" class="project-card">
-        <div class="proj-header"><span class="proj-icon">⚛️</span><span class="proj-name">Wang–Landau Sampling</span></div>
-        <p class="proj-desc">Monte Carlo / molecular dynamics simulation of the Blume–Capel model using Wang–Landau sampling to compute the density of states.</p>
-        <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Monte Carlo</span><span class="ptag">Statistical Physics</span></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section id="publications">
-  <div class="container">
-    <div class="section-label">Peer-reviewed work</div>
-    <h2 class="section-title">Publications</h2>
-    <p class="section-desc">
-      Research articles in applied mathematics, computational biology, and biophysics.
-      Full list on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en" style="color:var(--accent);">Google Scholar</a>.
-    </p>
-    <div class="pub-list">
-
-      <div class="pub-card">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">DOGMA: de novo assembly of densely labelled optical DNA maps using a matrix profile approach</div>
-          <div class="pub-authors">Dvirnas A, Leal-Garza LM, Abbaspour Z, Fröbrant E, Frykholm K, Wrande M, et al.</div>
-          <div class="pub-journal">PLOS ONE 20(12): e0335633</div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1371/journal.pone.0335633" class="pub-link">🔗 DOI</a>
-            <a href="https://github.com/dnadevcode/dogma" class="pub-link">💻 Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">Detection of structural variations in densely-labelled optical DNA barcodes: A hidden Markov model approach</div>
-          <div class="pub-authors">Dvirnas A, Stewart C, Müller V, et al.</div>
-          <div class="pub-journal">PLOS ONE</div>
-          <div class="pub-links">
-            <a href="https://pubmed.ncbi.nlm.nih.gov/34739528/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2019</div>
-        <div>
-          <div class="pub-title">Enzyme-free optical DNA mapping of the human genome using competitive binding</div>
-          <div class="pub-authors">Dvirnas A, et al.</div>
-          <div class="pub-journal">Nucleic Acids Research, 47(15): e89</div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1093/nar/gkz489" class="pub-link">🔗 DOI</a>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/31165870/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2019</div>
-        <div>
-          <div class="pub-title">Optical DNA Mapping Combined with Cas9-Targeted Resistance Gene Identification for Rapid Tracking of Resistance Plasmids in a Neonatal Intensive Care Unit Outbreak</div>
-          <div class="pub-authors">Dvirnas A, et al.</div>
-          <div class="pub-journal">mBio / ASM Journals</div>
-          <div class="pub-links">
-            <a href="https://pubmed.ncbi.nlm.nih.gov/31289171/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card thesis">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">Methods for barcode analysis in optical DNA mapping <span style="font-size:0.78rem; color:var(--acc2); font-weight:600; font-style:normal;">[PhD Thesis]</span></div>
-          <div class="pub-authors">Dvirnas A</div>
-          <div class="pub-journal">Lund University &nbsp;·&nbsp; ISBN: 978-91-8039-125-2 &nbsp;·&nbsp; Defended 25 Jan 2022</div>
-          <div class="pub-links">
-            <a href="https://portal.research.lu.se/files/110913095/Albertas_Dvirnas_WEBB.pdf" class="pub-link">📄 PDF</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <p style="color:var(--muted); font-size:0.87rem; margin-top:1.5rem;">
-       <!-- ✏️ <em>To add or update papers, edit the <code>pub-card</code> blocks in this file.</em>-->
-    </p>
-  </div>
-</section>
-
-<!-- POPULAR SCIENCE -->
-<section id="popular-science">
-  <div class="container">
-    <div class="section-label">Outreach</div>
-    <h2 class="section-title">Popular Science</h2>
-    <p class="section-desc">Making research accessible — talks, articles, and other outreach activities for a broader audience.</p>
-    <div class="ps-grid">
-
-
-
-
-      <div class="ps-card">
-        <div class="ps-stripe" style="background: linear-gradient(90deg,#f7971e,#ffd200);"></div>
-        <div class="ps-body">
-          <div class="ps-type">📰 Blog</div>
-          <div class="ps-title">From raw pixels to genome maps: a computational journey</div>
-          <div class="ps-desc">Walking through how raw microscopy images become meaningful genomic information — the algorithm pipeline behind optical DNA mapping.</div>
-        </div>
-      </div>
-
-    </div>
-    <p style="color:var(--muted); font-size:0.87rem; margin-top:2rem;">
-      
-             <!--       ✏️ <em>Replace these cards with your real talks, press articles, blog posts, and public lectures.</em>
- -->
-
-    </p>
-  </div>
-</section>
-
-<!-- TEACHING -->
-<section id="teaching">
-  <div class="container">
-    <div class="section-label">Education</div>
-    <h2 class="section-title">Teaching</h2>
-    <p class="section-desc">Courses and supervision at Umeå University. Update with your actual course codes, roles, and years.</p>
-    <div class="teaching-grid">
     </div>
   </div>
 </section>
@@ -480,6 +317,7 @@
     <div class="contact-grid">
       <a href="mailto:albertas.dvirnas@umu.se"                                       class="contact-card">✉️ albertas.dvirnas@umu.se</a>
       <a href="https://github.com/albertasdvirnas"                                    class="contact-card">💻 GitHub</a>
+      <a href="https://github.com/efmodeling"                                         class="contact-card">🤝 EF Modeling</a>
       <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en"      class="contact-card">🎓 Google Scholar</a>
       <a href="https://www.umu.se/en/staff/albertas-dvirnas/"                          class="contact-card">🏛️ Umeå University</a>
     </div>
@@ -488,17 +326,33 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden &nbsp;&middot;&nbsp; Built with &hearts; on GitHub Pages</p>
+  <p>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden &nbsp;&middot;&nbsp; Built with ♥ on GitHub Pages</p>
   <div class="footer-counter">
     👁️&nbsp;Page visits:&nbsp;
     <span id="visit-count">...</span>
   </div>
-  <noscript>
-    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&count_bg=%235b8dee&title_bg=%231c2333&icon=eye&icon_color=%23dce6f5&title=visits&edge_flat=true" alt="visit counter" style="height:20px;border-radius:4px;">
-  </noscript>
 </footer>
 
 <script>
+  /* ---- Theme ---- */
+  (function() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeBtn(saved);
+  })();
+  function updateThemeBtn(theme) {
+    const btn = document.getElementById('themeBtn');
+    if (!btn) return;
+    btn.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  }
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeBtn(next);
+  }
+
   /* ---- Navigation ---- */
   function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
   function closeNav()  { document.getElementById('navLinks').classList.remove('open'); }
@@ -510,12 +364,10 @@
     links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
   });
 
-  /* ---- Visit counter via hits.seeyoufarm.com ---- */
+  /* ---- Visit counter ---- */
   fetch('https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&format=json')
     .then(r => r.json())
-    .then(d => {
-      document.getElementById('visit-count').textContent = Number(d.total_count).toLocaleString();
-    })
+    .then(d => { document.getElementById('visit-count').textContent = Number(d.total_count).toLocaleString(); })
     .catch(() => {
       const el = document.getElementById('visit-count');
       el.innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbertsasdvirnas.github.io&count_bg=%235b8dee&title_bg=%231c2333&icon=eye&icon_color=%23dce6f5&title=visits&edge_flat=true" alt="visits" style="height:18px;border-radius:4px;vertical-align:middle;">';

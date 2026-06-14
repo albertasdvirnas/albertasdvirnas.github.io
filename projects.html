@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects – Albertas Dvirnas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root, [data-theme="dark"] {
+      --bg:#0f1117;--bg2:#141922;--card:#1c2333;--accent:#5b8dee;--acc2:#7c5cbf;
+      --green:#38d39f;--text:#dce6f5;--muted:#7a90b0;--border:rgba(255,255,255,0.07);
+      --nav-bg:rgba(15,17,23,0.88);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);
+    }
+    [data-theme="light"] {
+      --bg:#f5f7fb;--bg2:#edf0f6;--card:#ffffff;--accent:#3b6fd4;--acc2:#6840b0;
+      --green:#1aaa7a;--text:#1a2235;--muted:#5a6a85;--border:rgba(0,0,0,0.09);
+      --nav-bg:rgba(245,247,251,0.92);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;transition:background 0.3s,color 0.3s;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;}
+    .nav-name{font-weight:700;font-size:1rem;background:linear-gradient(120deg,var(--accent),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--text);}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .theme-toggle{cursor:pointer;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:5px;transition:border-color 0.2s,color 0.2s;white-space:nowrap;}
+    .theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
+    .page-hero{padding:7rem 2rem 3rem;background:radial-gradient(ellipse at 65% 35%,rgba(91,141,238,0.10) 0%,transparent 55%);}
+    .container{max-width:980px;margin:0 auto;}
+    .section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+    .section-title{font-family:'Lora',serif;font-size:clamp(1.75rem,3.5vw,2.4rem);font-weight:600;margin-bottom:0.8rem;}
+    .section-desc{color:var(--muted);font-size:0.97rem;max-width:580px;margin-bottom:2.8rem;}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.3rem;}
+    .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+    .project-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow);}
+    .proj-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.7rem;}
+    .proj-icon{font-size:1.5rem;}
+    .proj-name{font-weight:600;font-size:0.97rem;}
+    .proj-desc{color:var(--muted);font-size:0.86rem;line-height:1.6;margin-bottom:0.9rem;}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:0.35rem;}
+    .ptag{background:rgba(91,141,238,0.1);border:1px solid rgba(91,141,238,0.22);color:var(--accent);padding:2px 9px;border-radius:100px;font-size:0.73rem;font-weight:500;}
+    footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;}
+    .back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--muted);text-decoration:none;font-size:0.85rem;margin-bottom:1.5rem;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-name">Albertas Dvirnas</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="talks.html">Talks</a></li>
+    <li><a href="popular-science.html">Popular Science</a></li>
+    <li><a href="collabs.html">Collabs</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to home</a>
+    <div class="section-label">Research &amp; Software</div>
+    <h1 class="section-title">Projects</h1>
+    <p class="section-desc">Open-source computational tools and research software for time series analysis, single-molecule imaging, and scientific computing.</p>
+  </div>
+</div>
+
+<section style="padding:3rem 2rem 5rem;background:var(--bg);">
+  <div class="container">
+    <div class="projects-grid">
+
+      <a href="https://github.com/dnadevcode/dogma" class="project-card">
+        <div class="proj-header"><span class="proj-icon">🧬</span><span class="proj-name">DOGMA</span></div>
+        <p class="proj-desc">De novo assembly of densely labelled optical DNA maps using a matrix profile approach. Assembles DNA intensity barcodes into genome-scale maps without a reference sequence.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Genome Assembly</span><span class="ptag">Matrix Profile</span><span class="ptag">Time Series</span></div>
+      </a>
+
+      <a href="https://github.com/albertasdvirnas/emccd-pia" class="project-card">
+        <div class="proj-header"><span class="proj-icon">📷</span><span class="proj-name">EMCCD-PIA</span></div>
+        <p class="proj-desc">Photon-optimal image analysis pipeline for EMCCD cameras used in single-molecule fluorescence microscopy experiments.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Microscopy</span><span class="ptag">Image Analysis</span></div>
+      </a>
+
+      <a href="https://github.com/albertasdvirnas/hpfl-odm" class="project-card">
+        <div class="proj-header"><span class="proj-icon">🎯</span><span class="proj-name">HPFL-ODM</span></div>
+        <p class="proj-desc">High-precision fluorophore localization in nanochannel-based optical DNA mapping — algorithms for sub-diffraction position estimation.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">DNA Mapping</span><span class="ptag">Localization</span></div>
+      </a>
+
+      <a href="https://github.com/albertasdvirnas/sfwmatlab" class="project-card">
+        <div class="proj-header"><span class="proj-icon">🔬</span><span class="proj-name">SFW-Matlab</span></div>
+        <p class="proj-desc">MATLAB implementation of the Sliding Frank–Wolfe algorithm for super-resolution microscopy and sparse signal reconstruction from ODM barcodes.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Super-resolution</span><span class="ptag">Optimisation</span></div>
+      </a>
+
+      <a href="https://github.com/albertasdvirnas/dtw_matlab" class="project-card">
+        <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-name">DTW-Matlab</span></div>
+        <p class="proj-desc">MEX-compiled MATLAB interface to the Trillion DTW algorithm for ultra-fast dynamic time warping — a key tool for time series similarity and DNA barcode alignment.</p>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">C++</span><span class="ptag">Dynamic Time Warping</span><span class="ptag">Time Series</span></div>
+      </a>
+
+      <a href="https://github.com/albertasdvirnas/mcmd_wang_landau_sampling" class="project-card">
+        <div class="proj-header"><span class="proj-icon">⚛️</span><span class="proj-name">Wang–Landau Sampling</span></div>
+        <p class="proj-desc">Monte Carlo / molecular dynamics simulation of the Blume–Capel model using Wang–Landau sampling to compute the density of states.</p>
+        <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Monte Carlo</span><span class="ptag">Statistical Physics</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden</footer>
+
+<script>
+  (function(){const s=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
+  function updateBtn(t){const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';}
+  function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updateBtn(n);}
+  function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+</script>
+</body>
+</html>
