@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root, [data-theme="dark"] {
+    [data-theme="dark"] {
       --bg:#0f1117;--bg2:#141922;--card:#1c2333;--accent:#5b8dee;--acc2:#7c5cbf;
       --green:#38d39f;--text:#dce6f5;--muted:#7a90b0;--border:rgba(255,255,255,0.07);
       --nav-bg:rgba(15,17,23,0.88);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);
     }
-    [data-theme="light"] {
+    :root, [data-theme="light"] {
       --bg:#f5f7fb;--bg2:#edf0f6;--card:#ffffff;--accent:#3b6fd4;--acc2:#6840b0;
       --green:#1aaa7a;--text:#1a2235;--muted:#5a6a85;--border:rgba(0,0,0,0.09);
       --nav-bg:rgba(245,247,251,0.92);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
@@ -39,12 +39,18 @@
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.3rem;}
     .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
     .project-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow);}
-    .proj-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.7rem;}
-    .proj-icon{font-size:1.5rem;}
+    .proj-header{display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:0.7rem;}
+    .proj-icon{font-size:1.5rem;flex-shrink:0;}
+    .proj-names{display:flex;flex-direction:column;gap:0.1rem;}
     .proj-name{font-weight:600;font-size:0.97rem;}
+    .proj-codename{font-size:0.75rem;color:var(--muted);font-family:monospace;letter-spacing:0.02em;}
     .proj-desc{color:var(--muted);font-size:0.86rem;line-height:1.6;margin-bottom:0.9rem;}
+    .proj-links{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+    .proj-link{display:inline-flex;align-items:center;gap:0.3rem;background:transparent;border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:100px;font-size:0.75rem;font-weight:500;text-decoration:none;transition:border-color 0.2s,color 0.2s;}
+    .proj-link:hover{border-color:var(--accent);color:var(--accent);}
     .proj-tags{display:flex;flex-wrap:wrap;gap:0.35rem;}
     .ptag{background:rgba(91,141,238,0.1);border:1px solid rgba(91,141,238,0.22);color:var(--accent);padding:2px 9px;border-radius:100px;font-size:0.73rem;font-weight:500;}
+    .stat-badge{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.73rem;color:var(--muted);margin-right:0.4rem;}
     footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;}
     .back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--muted);text-decoration:none;font-size:0.85rem;margin-bottom:1.5rem;transition:color 0.2s;}
     .back-link:hover{color:var(--accent);}
@@ -64,7 +70,7 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
     <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -74,7 +80,7 @@
     <a href="index.html" class="back-link">← Back to home</a>
     <div class="section-label">Research &amp; Software</div>
     <h1 class="section-title">Projects</h1>
-    <p class="section-desc">Open-source computational tools and research software for time series analysis, single-molecule imaging, and scientific computing.</p>
+    <p class="section-desc">Open-source computational tools and research software for time series analysis, optical DNA mapping, and single-molecule imaging.</p>
   </div>
 </div>
 
@@ -82,41 +88,110 @@
   <div class="container">
     <div class="projects-grid">
 
-      <a href="https://github.com/dnadevcode/dogma" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🧬</span><span class="proj-name">DOGMA</span></div>
+      <!-- DOGMA -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">🧬</span>
+          <div class="proj-names">
+            <span class="proj-name">DNA Map Assembler</span>
+            <span class="proj-codename">DOGMA</span>
+          </div>
+        </div>
         <p class="proj-desc">De novo assembly of densely labelled optical DNA maps using a matrix profile approach. Assembles DNA intensity barcodes into genome-scale maps without a reference sequence.</p>
+        <div class="proj-links">
+          <a href="https://zenodo.org/search?q=DOGMA+optical+DNA" target="_blank" rel="noopener noreferrer" class="proj-link">📦 Zenodo</a>
+          <a href="https://github.com/dnadevcode/dogma" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitHub</a>
+        </div>
         <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Genome Assembly</span><span class="ptag">Matrix Profile</span><span class="ptag">Time Series</span></div>
-      </a>
+      </div>
 
-      <a href="https://github.com/albertasdvirnas/emccd-pia" class="project-card">
-        <div class="proj-header"><span class="proj-icon">📷</span><span class="proj-name">EMCCD-PIA</span></div>
-        <p class="proj-desc">Photon-optimal image analysis pipeline for EMCCD cameras used in single-molecule fluorescence microscopy experiments.</p>
+      <!-- EMCCD-PIA -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">📷</span>
+          <div class="proj-names">
+            <span class="proj-name">Single-Molecule Camera Analyser</span>
+            <span class="proj-codename">EMCCD-PIA</span>
+          </div>
+        </div>
+        <p class="proj-desc">Photon-optimal image analysis for EMCCD cameras used in single-molecule fluorescence microscopy. Extracts maximum signal from low-light biological imaging experiments.</p>
+        <div class="proj-links">
+          <a href="https://zenodo.org/search?q=EMCCD-PIA" target="_blank" rel="noopener noreferrer" class="proj-link">📦 Zenodo</a>
+          <a href="https://github.com/albertasdvirnas/emccd-pia" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitHub</a>
+        </div>
         <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Microscopy</span><span class="ptag">Image Analysis</span></div>
-      </a>
+        <div style="margin-top:0.5rem"><span class="stat-badge">👁 143 views</span><span class="stat-badge">⬇ 31 downloads</span></div>
+      </div>
 
-      <a href="https://github.com/albertasdvirnas/hpfl-odm" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🎯</span><span class="proj-name">HPFL-ODM</span></div>
-        <p class="proj-desc">High-precision fluorophore localization in nanochannel-based optical DNA mapping — algorithms for sub-diffraction position estimation.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">DNA Mapping</span><span class="ptag">Localization</span></div>
-      </a>
+      <!-- HCA -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">🔀</span>
+          <div class="proj-names">
+            <span class="proj-name">Chromosome Alignment Tool</span>
+            <span class="proj-codename">HCA</span>
+          </div>
+        </div>
+        <p class="proj-desc">Aligns optical DNA mapping barcodes against reference chromosome sequences to identify and localise genomic regions with high accuracy.</p>
+        <div class="proj-links">
+          <a href="https://zenodo.org/search?q=HCA+chromosome" target="_blank" rel="noopener noreferrer" class="proj-link">📦 Zenodo</a>
+          <a href="https://github.com/albertasdvirnas/hca" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitHub</a>
+        </div>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">DNA Mapping</span><span class="ptag">Sequence Alignment</span></div>
+        <div style="margin-top:0.5rem"><span class="stat-badge">👁 152 views</span><span class="stat-badge">⬇ 12 downloads</span></div>
+      </div>
 
-      <a href="https://github.com/albertasdvirnas/sfwmatlab" class="project-card">
-        <div class="proj-header"><span class="proj-icon">🔬</span><span class="proj-name">SFW-Matlab</span></div>
-        <p class="proj-desc">MATLAB implementation of the Sliding Frank–Wolfe algorithm for super-resolution microscopy and sparse signal reconstruction from ODM barcodes.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Super-resolution</span><span class="ptag">Optimisation</span></div>
-      </a>
+      <!-- LLDEV -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">🖼️</span>
+          <div class="proj-names">
+            <span class="proj-name">Optical Mapping Image Processor</span>
+            <span class="proj-codename">LLDEV</span>
+          </div>
+        </div>
+        <p class="proj-desc">Image processing pipeline for optical DNA mapping experiments. Handles raw microscopy images through to extracted intensity barcodes ready for downstream analysis.</p>
+        <div class="proj-links">
+          <a href="https://zenodo.org/search?q=LLDEV+optical" target="_blank" rel="noopener noreferrer" class="proj-link">📦 Zenodo</a>
+          <a href="https://github.com/albertasdvirnas/lldev" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitHub</a>
+        </div>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Image Processing</span><span class="ptag">Optical DNA Mapping</span></div>
+        <div style="margin-top:0.5rem"><span class="stat-badge">👁 166 views</span><span class="stat-badge">⬇ 17 downloads</span></div>
+      </div>
 
-      <a href="https://github.com/albertasdvirnas/dtw_matlab" class="project-card">
-        <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-name">DTW-Matlab</span></div>
-        <p class="proj-desc">MEX-compiled MATLAB interface to the Trillion DTW algorithm for ultra-fast dynamic time warping — a key tool for time series similarity and DNA barcode alignment.</p>
-        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">C++</span><span class="ptag">Dynamic Time Warping</span><span class="ptag">Time Series</span></div>
-      </a>
+      <!-- SD3 -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">🔵</span>
+          <div class="proj-names">
+            <span class="proj-name">DNA Fluorescent Spot Detector</span>
+            <span class="proj-codename">SD3</span>
+          </div>
+        </div>
+        <p class="proj-desc">Detects and localises fluorescently stained DNA dots in microscopy images. Used to identify labelling positions along DNA molecules for barcode construction.</p>
+        <div class="proj-links">
+          <a href="https://zenodo.org/search?q=SD3+DNA" target="_blank" rel="noopener noreferrer" class="proj-link">📦 Zenodo</a>
+          <a href="https://github.com/albertasdvirnas/sd3" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitHub</a>
+        </div>
+        <div class="proj-tags"><span class="ptag">MATLAB</span><span class="ptag">Spot Detection</span><span class="ptag">Fluorescence Microscopy</span></div>
+        <div style="margin-top:0.5rem"><span class="stat-badge">👁 174 views</span><span class="stat-badge">⬇ 41 downloads</span></div>
+      </div>
 
-      <a href="https://github.com/albertasdvirnas/mcmd_wang_landau_sampling" class="project-card">
-        <div class="proj-header"><span class="proj-icon">⚛️</span><span class="proj-name">Wang–Landau Sampling</span></div>
-        <p class="proj-desc">Monte Carlo / molecular dynamics simulation of the Blume–Capel model using Wang–Landau sampling to compute the density of states.</p>
-        <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Monte Carlo</span><span class="ptag">Statistical Physics</span></div>
-      </a>
+      <!-- HMMSV -->
+      <div class="project-card">
+        <div class="proj-header">
+          <span class="proj-icon">🔬</span>
+          <div class="proj-names">
+            <span class="proj-name">Structural Variation Detector</span>
+            <span class="proj-codename">HMMSV</span>
+          </div>
+        </div>
+        <p class="proj-desc">Hidden Markov Model for detecting structural variations in DNA sequences from optical mapping data. Identifies large-scale genomic rearrangements such as insertions, deletions, and inversions.</p>
+        <div class="proj-links">
+          <a href="https://gitlab.com/albertasdvirnas/hmmsv" target="_blank" rel="noopener noreferrer" class="proj-link">💻 GitLab</a>
+        </div>
+        <div class="proj-tags"><span class="ptag">Hidden Markov Models</span><span class="ptag">Structural Variants</span><span class="ptag">Genomics</span></div>
+      </div>
 
     </div>
   </div>
@@ -125,7 +200,7 @@
 <footer>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden</footer>
 
 <script>
-  (function(){const s=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
   function updateBtn(t){const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';}
   function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updateBtn(n);}
   function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}

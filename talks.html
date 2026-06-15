@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root, [data-theme="dark"] {
+    [data-theme="dark"] {
       --bg:#0f1117;--bg2:#141922;--card:#1c2333;--accent:#5b8dee;--acc2:#7c5cbf;
       --text:#dce6f5;--muted:#7a90b0;--border:rgba(255,255,255,0.07);
       --nav-bg:rgba(15,17,23,0.88);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);
     }
-    [data-theme="light"] {
+    :root, [data-theme="light"] {
       --bg:#f5f7fb;--bg2:#edf0f6;--card:#ffffff;--accent:#3b6fd4;--acc2:#6840b0;
       --text:#1a2235;--muted:#5a6a85;--border:rgba(0,0,0,0.09);
       --nav-bg:rgba(245,247,251,0.92);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
@@ -36,18 +36,27 @@
     .section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
     .section-title{font-family:'Lora',serif;font-size:clamp(1.75rem,3.5vw,2.4rem);font-weight:600;margin-bottom:0.8rem;}
     .section-desc{color:var(--muted);font-size:0.97rem;max-width:580px;margin-bottom:2.8rem;}
-    .talk-list{display:flex;flex-direction:column;gap:1.1rem;}
-    .talk-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem 1.6rem;display:grid;grid-template-columns:56px 1fr;gap:1.2rem;align-items:start;transition:border-color 0.2s;}
+    .year-group{margin-bottom:2.5rem;}
+    .year-heading{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;color:var(--accent);margin-bottom:0.9rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+    .talk-list{display:flex;flex-direction:column;gap:0.9rem;}
+    .talk-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;transition:border-color 0.2s;}
     .talk-card:hover{border-color:var(--accent);}
-    .talk-year{font-size:0.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;padding-top:3px;}
-    .talk-title{font-weight:600;font-size:0.94rem;margin-bottom:0.25rem;}
-    .talk-venue{color:var(--muted);font-size:0.83rem;font-style:italic;margin-bottom:0.2rem;}
-    .talk-type{display:inline-block;background:rgba(91,141,238,0.1);border:1px solid rgba(91,141,238,0.22);color:var(--accent);padding:2px 9px;border-radius:100px;font-size:0.73rem;font-weight:500;margin-top:0.4rem;}
-    .empty-state{color:var(--muted);font-size:0.95rem;padding:3rem 0;text-align:center;}
+    .talk-card.upcoming{border-left:3px solid var(--accent);}
+    .talk-date{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;padding-top:3px;white-space:nowrap;min-width:52px;}
+    .talk-date.future{color:var(--accent);}
+    .talk-title{font-weight:600;font-size:0.93rem;margin-bottom:0.2rem;}
+    .talk-venue{color:var(--muted);font-size:0.82rem;font-style:italic;margin-bottom:0.35rem;}
+    .talk-badges{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.3rem;}
+    .talk-type{display:inline-block;padding:2px 9px;border-radius:100px;font-size:0.72rem;font-weight:500;}
+    .badge-invited{background:rgba(56,211,159,0.12);border:1px solid rgba(56,211,159,0.28);color:#1aaa7a;}
+    [data-theme="dark"] .badge-invited{color:#38d39f;}
+    .badge-contributed{background:rgba(91,141,238,0.1);border:1px solid rgba(91,141,238,0.22);color:var(--accent);}
+    .badge-upcoming{background:rgba(247,151,30,0.1);border:1px solid rgba(247,151,30,0.25);color:#d97706;}
+    [data-theme="dark"] .badge-upcoming{color:#f7971e;}
     footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;}
     .back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--muted);text-decoration:none;font-size:0.85rem;margin-bottom:1.5rem;transition:color 0.2s;}
     .back-link:hover{color:var(--accent);}
-    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}.talk-card{grid-template-columns:1fr;gap:0.3rem;}.talk-date{font-size:0.7rem;}}
   </style>
 </head>
 <body>
@@ -63,7 +72,7 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
     <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -79,26 +88,135 @@
 
 <section style="padding:3rem 2rem 5rem;background:var(--bg);">
   <div class="container">
-    <div class="talk-list">
-      <!-- Add your talks below. Example structure:
-      <div class="talk-card">
-        <div class="talk-year">2024</div>
-        <div>
-          <div class="talk-title">Title of your talk</div>
-          <div class="talk-venue">Conference Name, City, Country</div>
-          <span class="talk-type">Oral presentation</span>
+
+    <!-- 2026 -->
+    <div class="year-group">
+      <div class="year-heading">2026</div>
+      <div class="talk-list">
+
+        <div class="talk-card upcoming">
+          <div class="talk-date future">Jul 2026</div>
+          <div>
+            <div class="talk-title">Diffusion map based forecasting from eDNA abundance time series</div>
+            <div class="talk-venue">MMEE26, Cork, Ireland</div>
+            <div class="talk-badges"><span class="talk-type badge-upcoming">⏳ Upcoming</span><span class="talk-type badge-contributed">Contributed</span></div>
+          </div>
         </div>
+
+        <div class="talk-card upcoming">
+          <div class="talk-date future">Jun 2026</div>
+          <div>
+            <div class="talk-title">Bridging Matrix Profiles and Empirical Dynamic Modelling in Predictions for Environmental Data</div>
+            <div class="talk-venue">Nordstat 2026, Helsinki, Finland</div>
+            <div class="talk-badges"><span class="talk-type badge-upcoming">⏳ Upcoming</span><span class="talk-type badge-contributed">Contributed</span></div>
+          </div>
+        </div>
+
+        <div class="talk-card">
+          <div class="talk-date">May 2026</div>
+          <div>
+            <div class="talk-title">Footprints in time series</div>
+            <div class="talk-venue">Department of Earth and Environmental Sciences, Lund University, Sweden</div>
+            <div class="talk-badges"><span class="talk-type badge-invited">★ Invited</span></div>
+          </div>
+        </div>
+
+        <div class="talk-card">
+          <div class="talk-date">Jan 2026</div>
+          <div>
+            <div class="talk-title">Empirical modeling perspective to ecosystem change</div>
+            <div class="talk-venue">Arctic Meeting for Adaptive Mechanisms in Biological Systems, Abisko, Sweden</div>
+            <div class="talk-badges"><span class="talk-type badge-invited">★ Invited</span></div>
+          </div>
+        </div>
+
       </div>
-      -->
-      <div class="empty-state">🎤 Talks will be listed here. Edit <code>talks.html</code> to add your presentations.</div>
     </div>
+
+    <!-- 2021 -->
+    <div class="year-group">
+      <div class="year-heading">2021</div>
+      <div class="talk-list">
+
+        <div class="talk-card">
+          <div class="talk-date">Oct 2021</div>
+          <div>
+            <div class="talk-title">Methods for barcode analysis in optical DNA mapping</div>
+            <div class="talk-venue">Nordic Computational Biology</div>
+            <div class="talk-badges"><span class="talk-type badge-invited">★ Invited</span></div>
+          </div>
+        </div>
+
+        <div class="talk-card">
+          <div class="talk-date">Aug 2021</div>
+          <div>
+            <div class="talk-title">Using Statistical Averages to Improve Similarity Search of Large DNA Molecules to the Human Genome</div>
+            <div class="talk-venue">Joint Statistical Meetings 2021</div>
+            <div class="talk-badges"><span class="talk-type badge-contributed">Contributed</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2019 -->
+    <div class="year-group">
+      <div class="year-heading">2019</div>
+      <div class="talk-list">
+
+        <div class="talk-card">
+          <div class="talk-date">Dec 2019</div>
+          <div>
+            <div class="talk-title">Matricos profilių paremtas motyvų atradimas laiko eilutėse</div>
+            <div class="talk-venue">LJMS 9, Lithuania</div>
+            <div class="talk-badges"><span class="talk-type badge-contributed">Contributed</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2017 -->
+    <div class="year-group">
+      <div class="year-heading">2017</div>
+      <div class="talk-list">
+
+        <div class="talk-card">
+          <div class="talk-date">Apr 2017</div>
+          <div>
+            <div class="talk-title">DNA melting: theory vs. experiments</div>
+            <div class="talk-venue">Symposium Nanoconfined DNA, University of Gothenburg, Sweden</div>
+            <div class="talk-badges"><span class="talk-type badge-invited">★ Invited</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2014 -->
+    <div class="year-group">
+      <div class="year-heading">2014</div>
+      <div class="talk-list">
+
+        <div class="talk-card">
+          <div class="talk-date">Jul 2014</div>
+          <div>
+            <div class="talk-title">Braid Group Cryptography</div>
+            <div class="talk-venue">YTM 2014, Copenhagen, Denmark</div>
+            <div class="talk-badges"><span class="talk-type badge-contributed">Contributed</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
 <footer>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden</footer>
 
 <script>
-  (function(){const s=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
   function updateBtn(t){const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';}
   function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updateBtn(n);}
   function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
