@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* DARK THEME (default) */
-    :root, [data-theme="dark"] {
+    /* DARK THEME */
+    [data-theme="dark"] {
       --bg:     #0f1117;
       --bg2:    #141922;
       --card:   #1c2333;
@@ -28,8 +28,8 @@
       --shadow: 0 4px 24px rgba(0,0,0,0.4);
     }
 
-    /* WHITE / LIGHT THEME */
-    [data-theme="light"] {
+    /* WHITE / LIGHT THEME (default) */
+    :root, [data-theme="light"] {
       --bg:     #f5f7fb;
       --bg2:    #edf0f6;
       --card:   #ffffff;
@@ -111,6 +111,8 @@
     .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start; }
     .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
     .about-text strong { color: var(--text); }
+    .about-text a { color: var(--accent); text-decoration: none; }
+    .about-text a:hover { text-decoration: underline; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
     .tag { background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: 4px 13px; border-radius: 100px; font-size: 0.78rem; font-weight: 500; }
     .info-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
@@ -119,6 +121,7 @@
     .info-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 2px; letter-spacing: 0.04em; }
     .info-val { font-weight: 500; font-size: 0.88rem; }
     .info-val a { color: var(--accent); text-decoration: none; }
+    .info-val a:hover { text-decoration: underline; }
 
     /* NAV CARDS (section shortcuts) */
     #sections-nav { background: var(--bg); }
@@ -240,8 +243,12 @@
         </p>
         <p>
           I completed my <strong>PhD at Lund University</strong> (2022) under the supervision of
-          Prof. Tobias Ambjörnsson in the Computational Biology and Biological Physics group,
+          <a href="https://www.cec.lu.se/tobias-ambjornsson" target="_blank" rel="noopener noreferrer">Prof. Tobias Ambjörnsson</a>
+          in the Computational Biology and Biological Physics group,
           where I developed barcode analysis algorithms for optical DNA mapping.
+          During my PhD I also worked as an in-lab theoretician in
+          <a href="https://www.chalmers.se/en/departments/life/research/molecular-bioscience/westerlund-lab/" target="_blank" rel="noopener noreferrer">Fredrik Westerlund’s lab</a>
+          at Chalmers University of Technology.
         </p>
         <div class="tags">
           <span class="tag">Time Series Analysis</span>
@@ -259,11 +266,12 @@
       </div>
       <div>
         <ul class="info-list">
-          <li><span class="info-icon">🏛️</span><div><div class="info-label">Current position</div><div class="info-val">Postdoctoral Researcher, Umeå University</div></div></li>
-          <li><span class="info-icon">🎓</span><div><div class="info-label">PhD</div><div class="info-val">Lund University, 2022 &mdash; Comp. Biology &amp; Biophysics</div></div></li>
+          <li><span class="info-icon">🏛️</span><div><div class="info-label">Current position</div><div class="info-val"><a href="https://www.umu.se/en/staff/albertas-dvirnas/" target="_blank" rel="noopener noreferrer">Postdoctoral Researcher, Umeå University</a></div></div></li>
+          <li><span class="info-icon">🎓</span><div><div class="info-label">PhD</div><div class="info-val"><a href="https://www.lunduniversity.lu.se/" target="_blank" rel="noopener noreferrer">Lund University, 2022 &mdash; Comp. Biology &amp; Biophysics</a></div></div></li>
           <li><span class="info-icon">📈</span><div><div class="info-label">Research focus</div><div class="info-val">Time Series Analysis &amp; Applied Mathematics</div></div></li>
-          <li><span class="info-icon">💻</span><div><div class="info-label">GitHub</div><div class="info-val"><a href="https://github.com/albertasdvirnas">@albertasdvirnas</a></div></div></li>
-          <li><span class="info-icon">🤝</span><div><div class="info-label">EF Modeling Lab</div><div class="info-val"><a href="https://github.com/efmodeling">@efmodeling</a></div></div></li>
+          <li><span class="info-icon">💻</span><div><div class="info-label">GitHub</div><div class="info-val"><a href="https://github.com/albertasdvirnas" target="_blank" rel="noopener noreferrer">@albertasdvirnas</a></div></div></li>
+          <li><span class="info-icon">🤝</span><div><div class="info-label">EF Modeling Lab</div><div class="info-val"><a href="https://github.com/efmodeling" target="_blank" rel="noopener noreferrer">@efmodeling</a></div></div></li>
+          <li><span class="info-icon">🔗</span><div><div class="info-label">LinkedIn</div><div class="info-val"><a href="https://www.linkedin.com/in/albertasdvirnas/" target="_blank" rel="noopener noreferrer">albertasdvirnas</a></div></div></li>
           <li><span class="info-icon">📍</span><div><div class="info-label">Location</div><div class="info-val">Umeå, Sweden</div></div></li>
         </ul>
       </div>
@@ -315,11 +323,12 @@
       Reach out for collaborations, questions about my research, thesis supervision, or just to say hello!
     </p>
     <div class="contact-grid">
-      <a href="mailto:albertas.dvirnas@umu.se"                                       class="contact-card">✉️ albertas.dvirnas@umu.se</a>
-      <a href="https://github.com/albertasdvirnas"                                    class="contact-card">💻 GitHub</a>
-      <a href="https://github.com/efmodeling"                                         class="contact-card">🤝 EF Modeling</a>
-      <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en"      class="contact-card">🎓 Google Scholar</a>
-      <a href="https://www.umu.se/en/staff/albertas-dvirnas/"                          class="contact-card">🏛️ Umeå University</a>
+      <a href="mailto:albertas.dvirnas@umu.se"                                                                    class="contact-card">✉️ albertas.dvirnas@umu.se</a>
+      <a href="https://github.com/albertasdvirnas" target="_blank" rel="noopener noreferrer"                      class="contact-card">💻 GitHub</a>
+      <a href="https://github.com/efmodeling" target="_blank" rel="noopener noreferrer"                           class="contact-card">🤝 EF Modeling</a>
+      <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="contact-card">🎓 Google Scholar</a>
+      <a href="https://www.umu.se/en/staff/albertas-dvirnas/" target="_blank" rel="noopener noreferrer"           class="contact-card">🏛️ Umeå University</a>
+      <a href="https://www.linkedin.com/in/albertasdvirnas/" target="_blank" rel="noopener noreferrer"           class="contact-card">🔗 LinkedIn</a>
     </div>
   </div>
 </section>
@@ -336,7 +345,7 @@
 <script>
   /* ---- Theme ---- */
   (function() {
-    const saved = localStorage.getItem('theme') || 'dark';
+    const saved = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', saved);
     updateThemeBtn(saved);
   })();
