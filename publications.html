@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root, [data-theme="dark"] {
+    [data-theme="dark"] {
       --bg:#0f1117;--bg2:#141922;--card:#1c2333;--accent:#5b8dee;--acc2:#7c5cbf;
       --text:#dce6f5;--muted:#7a90b0;--border:rgba(255,255,255,0.07);
       --nav-bg:rgba(15,17,23,0.88);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.4);
     }
-    [data-theme="light"] {
+    :root, [data-theme="light"] {
       --bg:#f5f7fb;--bg2:#edf0f6;--card:#ffffff;--accent:#3b6fd4;--acc2:#6840b0;
       --text:#1a2235;--muted:#5a6a85;--border:rgba(0,0,0,0.09);
       --nav-bg:rgba(245,247,251,0.92);--radius:12px;--shadow:0 4px 24px rgba(0,0,0,0.08);
@@ -36,21 +36,41 @@
     .section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
     .section-title{font-family:'Lora',serif;font-size:clamp(1.75rem,3.5vw,2.4rem);font-weight:600;margin-bottom:0.8rem;}
     .section-desc{color:var(--muted);font-size:0.97rem;max-width:580px;margin-bottom:2.8rem;}
-    .pub-list{display:flex;flex-direction:column;gap:1.1rem;}
-    .pub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem 1.6rem;display:grid;grid-template-columns:46px 1fr;gap:1.2rem;align-items:start;transition:border-color 0.2s;}
+    .stats-row{display:flex;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap;}
+    .stat-item{display:flex;flex-direction:column;gap:0.1rem;}
+    .stat-num{font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1;}
+    .stat-label{font-size:0.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+    .year-group{margin-bottom:2.5rem;}
+    .year-heading{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;color:var(--accent);margin-bottom:0.9rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
+    .pub-list{display:flex;flex-direction:column;gap:0.9rem;}
+    .pub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;display:grid;grid-template-columns:42px 1fr;gap:1rem;align-items:start;transition:border-color 0.2s;}
     .pub-card:hover{border-color:var(--accent);}
+    .pub-card.important{border-left:3px solid var(--accent);}
     .pub-card.thesis{border-left:3px solid var(--acc2);}
-    .pub-year{font-size:0.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;padding-top:3px;}
-    .pub-title{font-weight:600;font-size:0.94rem;margin-bottom:0.25rem;}
-    .pub-authors{color:var(--muted);font-size:0.83rem;font-style:italic;margin-bottom:0.25rem;}
-    .pub-journal{color:var(--accent);font-size:0.83rem;font-weight:500;}
-    .pub-links{margin-top:0.55rem;display:flex;gap:0.75rem;flex-wrap:wrap;}
-    .pub-link{color:var(--muted);text-decoration:none;font-size:0.78rem;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s;border:1px solid var(--border);padding:2px 10px;border-radius:6px;}
+    .pub-card.preprint{border-left:3px dashed var(--border);opacity:0.85;}
+    .pub-num{font-size:0.72rem;font-weight:700;color:var(--accent);text-align:right;padding-top:3px;}
+    .pub-num.pending{color:var(--muted);font-style:italic;}
+    .pub-title{font-weight:600;font-size:0.93rem;margin-bottom:0.2rem;}
+    .pub-authors{color:var(--muted);font-size:0.81rem;font-style:italic;margin-bottom:0.2rem;}
+    .pub-authors strong{color:var(--text);font-style:normal;}
+    .pub-journal{color:var(--accent);font-size:0.82rem;font-weight:500;margin-bottom:0.1rem;}
+    .pub-badges{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.35rem;margin-bottom:0.35rem;}
+    .badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:0.7rem;font-weight:600;}
+    .badge-star{background:rgba(209,153,0,0.12);border:1px solid rgba(209,153,0,0.28);color:#b07a00;}
+    [data-theme="dark"] .badge-star{color:#e8af34;}
+    .badge-postphd{background:rgba(91,141,238,0.1);border:1px solid rgba(91,141,238,0.22);color:var(--accent);}
+    .badge-submitted{background:rgba(56,211,159,0.1);border:1px solid rgba(56,211,159,0.25);color:#1aaa7a;}
+    [data-theme="dark"] .badge-submitted{color:#38d39f;}
+    .badge-inprep{background:rgba(122,144,176,0.1);border:1px solid rgba(122,144,176,0.22);color:var(--muted);}
+    .pub-links{margin-top:0.45rem;display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .pub-link{color:var(--muted);text-decoration:none;font-size:0.76rem;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s;border:1px solid var(--border);padding:2px 9px;border-radius:6px;}
     .pub-link:hover{color:var(--accent);border-color:var(--accent);}
     footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;}
     .back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--muted);text-decoration:none;font-size:0.85rem;margin-bottom:1.5rem;transition:color 0.2s;}
     .back-link:hover{color:var(--accent);}
-    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+    .legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:2rem;font-size:0.78rem;color:var(--muted);}
+    .legend span{display:flex;align-items:center;gap:0.3rem;}
+    @media(max-width:760px){nav{padding:0 1.2rem;}.nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--nav-bg);padding:1rem 1.5rem 1.5rem;gap:1.2rem;border-bottom:1px solid var(--border);}.nav-links.open{display:flex;}.hamburger{display:flex;}.pub-card{grid-template-columns:1fr;gap:0.3rem;}.pub-num{text-align:left;}}
   </style>
 </head>
 <body>
@@ -66,7 +86,7 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
     <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -76,84 +96,314 @@
     <a href="index.html" class="back-link">← Back to home</a>
     <div class="section-label">Peer-reviewed work</div>
     <h1 class="section-title">Publications</h1>
-    <p class="section-desc">Research articles in applied mathematics, computational biology, and biophysics. Full list on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&hl=en" style="color:var(--accent);">Google Scholar</a>.</p>
+    <p class="section-desc">Research articles in applied mathematics, computational biology, and biophysics. Full list on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Google Scholar</a>.</p>
   </div>
 </div>
 
 <section style="padding:3rem 2rem 5rem;background:var(--bg);">
   <div class="container">
-    <div class="pub-list">
 
-      <div class="pub-card">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">DOGMA: de novo assembly of densely labelled optical DNA maps using a matrix profile approach</div>
-          <div class="pub-authors">Dvirnas A, Leal-Garza LM, Abbaspour Z, Fröbrant E, Frykholm K, Wrande M, et al.</div>
-          <div class="pub-journal">PLOS ONE 20(12): e0335633</div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1371/journal.pone.0335633" class="pub-link">🔗 DOI</a>
-            <a href="https://github.com/dnadevcode/dogma" class="pub-link">💻 Code</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">Detection of structural variations in densely-labelled optical DNA barcodes: A hidden Markov model approach</div>
-          <div class="pub-authors">Dvirnas A, Stewart C, Müller V, et al.</div>
-          <div class="pub-journal">PLOS ONE</div>
-          <div class="pub-links">
-            <a href="https://pubmed.ncbi.nlm.nih.gov/34739528/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2019</div>
-        <div>
-          <div class="pub-title">Enzyme-free optical DNA mapping of the human genome using competitive binding</div>
-          <div class="pub-authors">Dvirnas A, et al.</div>
-          <div class="pub-journal">Nucleic Acids Research, 47(15): e89</div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1093/nar/gkz489" class="pub-link">🔗 DOI</a>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/31165870/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card">
-        <div class="pub-year">2019</div>
-        <div>
-          <div class="pub-title">Optical DNA Mapping Combined with Cas9-Targeted Resistance Gene Identification for Rapid Tracking of Resistance Plasmids in a Neonatal Intensive Care Unit Outbreak</div>
-          <div class="pub-authors">Dvirnas A, et al.</div>
-          <div class="pub-journal">mBio / ASM Journals</div>
-          <div class="pub-links">
-            <a href="https://pubmed.ncbi.nlm.nih.gov/31289171/" class="pub-link">🔗 PubMed</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-card thesis">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">Methods for barcode analysis in optical DNA mapping <span style="font-size:0.78rem;color:var(--acc2);font-weight:600;">[PhD Thesis]</span></div>
-          <div class="pub-authors">Dvirnas A</div>
-          <div class="pub-journal">Lund University &nbsp;·&nbsp; ISBN: 978-91-8039-125-2 &nbsp;·&nbsp; Defended 25 Jan 2022</div>
-          <div class="pub-links">
-            <a href="https://portal.research.lu.se/files/110913095/Albertas_Dvirnas_WEBB.pdf" class="pub-link">📄 PDF</a>
-          </div>
-        </div>
-      </div>
-
+    <div class="stats-row">
+      <div class="stat-item"><span class="stat-num">14</span><span class="stat-label">Peer-reviewed articles</span></div>
+      <div class="stat-item"><span class="stat-num">145</span><span class="stat-label">Citations</span></div>
+      <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">In preparation / submitted</span></div>
     </div>
+
+    <div class="legend">
+      <span><span class="badge badge-star">★ Top 5</span> One of five most important publications</span>
+      <span><span class="badge badge-postphd"># Post-PhD</span> Most important post-PhD publication</span>
+    </div>
+
+    <!-- IN PREPARATION -->
+    <div class="year-group">
+      <div class="year-heading">In Preparation &amp; Submitted</div>
+      <div class="pub-list">
+
+        <div class="pub-card preprint">
+          <div class="pub-num pending">•</div>
+          <div>
+            <div class="pub-title">Benchmarking dynamical and neural forecasting for compositional ecological time series</div>
+            <div class="pub-authors"><strong>Dvirnas A.</strong>, Stenberg P., Brännström Å.</div>
+            <div class="pub-badges"><span class="badge badge-inprep">In preparation</span></div>
+          </div>
+        </div>
+
+        <div class="pub-card preprint">
+          <div class="pub-num pending">•</div>
+          <div>
+            <div class="pub-title">Rapid analysis of toxin-encoding ETEC plasmids using a basic optical DNA mapping setup suitable for low-resource settings</div>
+            <div class="pub-authors">Frykholm K., Wranne M.S., Zachrisson H., Wrande M., Sriram K.K., <strong>Dvirnas A.</strong>, Garcias Puigserver B., Leal-Garza L.M., Sandegren L., Sjöling Å., von Mentzer A., &amp; Westerlund F.</div>
+            <div class="pub-badges"><span class="badge badge-submitted">Submitted</span></div>
+          </div>
+        </div>
+
+        <div class="pub-card preprint">
+          <div class="pub-num pending">•</div>
+          <div>
+            <div class="pub-title">Complete de novo assembly of yeast genomes using enzyme-free, dense optical genome mapping</div>
+            <div class="pub-authors">Westerlund F., Leal-Garza L., Zachrisson H., <strong>Dvirnas A.</strong>, Goyal G., Obi I., Sabouri N., Ambjörnsson T.</div>
+            <div class="pub-badges"><span class="badge badge-submitted">Submitted</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-group">
+      <div class="year-heading">2025</div>
+      <div class="pub-list">
+
+        <div class="pub-card important">
+          <div class="pub-num">[1]</div>
+          <div>
+            <div class="pub-title">DOGMA: de novo assembly of densely labelled optical DNA maps using a matrix profile approach</div>
+            <div class="pub-authors"><strong>Dvirnas A.</strong>, Leal-Garza L.M., Abbaspour Z., Fröbrant E., Frykholm K., Wrande M., Sandegren L., Westerlund F., Ambjörnsson T.</div>
+            <div class="pub-journal">PLOS ONE, 20(12): e0335633</div>
+            <div class="pub-badges"><span class="badge badge-star">★ Top 5</span><span class="badge badge-postphd"># Post-PhD</span></div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1371/journal.pone.0335633" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+              <a href="https://github.com/dnadevcode/dogma" target="_blank" rel="noopener noreferrer" class="pub-link">💻 Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[2]</div>
+          <div>
+            <div class="pub-title">High-throughput single molecule nanofluidic studies on <em>B. subtilis</em> Rok protein interaction with DNA</div>
+            <div class="pub-authors">Pavlova E., Kunnath R.N., van Erp B., <strong>Dvirnas A.</strong>, Sriram K., Dame R., Westerlund F.</div>
+            <div class="pub-journal">QRB Discovery, Cambridge Core</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1017/qrd.2025.2" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[3]</div>
+          <div>
+            <div class="pub-title">Stained DNA Dot Detection (SD3): An automated tool for quantifying fluorescent features along single stretched DNA molecules</div>
+            <div class="pub-authors">Aning O.A., <strong>Dvirnas A.</strong>, Nyblom M., Krog J., Carlson J., Johansson P., Ambjörnsson T., Westerlund F.</div>
+            <div class="pub-journal">DNA Repair, 149:103836</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1016/j.dnarep.2025.103836" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[4]</div>
+          <div>
+            <div class="pub-title">Strain-level typing of <em>Streptococcus pyogenes</em> using optical DNA mapping</div>
+            <div class="pub-authors">Kunnath R.N., Abbaspour Z., Johnning A., Frykholm K., Wrande M., <strong>Dvirnas A.</strong>, Kök S., Giske C.G., Ambjörnsson T., Sandegren L., Kristiansson E.</div>
+            <div class="pub-journal">ACS Infectious Diseases, 11(11):3085–3092</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1021/acsinfecdis.5c00XXX" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[5]</div>
+          <div>
+            <div class="pub-title">Photophysical image analysis for sCMOS cameras: Noise modelling and estimation of background parameters in fluorescence-microscopy images</div>
+            <div class="pub-authors">Mohanta D., Kunnath R.N., Clarkson E., <strong>Dvirnas A.</strong>, Westerlund F., Ambjörnsson T.</div>
+            <div class="pub-journal">PLOS ONE, 20(11): e0335310</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1371/journal.pone.0335310" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[6]</div>
+          <div>
+            <div class="pub-title">Random sampling of ligand arrangements on a one-dimensional lattice</div>
+            <div class="pub-authors">Mohanta D., <strong>Dvirnas A.</strong>, Ambjörnsson T.</div>
+            <div class="pub-journal">Physical Review E, 111(1):014412</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1103/PhysRevE.111.014412" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-group">
+      <div class="year-heading">2024</div>
+      <div class="pub-list">
+
+        <div class="pub-card important">
+          <div class="pub-num">[7]</div>
+          <div>
+            <div class="pub-title">Photophysical image analysis: Unsupervised probabilistic thresholding for images from electron-multiplying charge-coupled devices</div>
+            <div class="pub-authors">Krog J., <strong>Dvirnas A.</strong>, Ström O.E., Beech J.P., Tegenfeldt J.O., Müller V., Westerlund F., Ambjörnsson T.</div>
+            <div class="pub-journal">PLOS ONE</div>
+            <div class="pub-badges"><span class="badge badge-star">★ Top 5</span></div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1371/journal.pone.0300122" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <div class="year-group">
+      <div class="year-heading">2023</div>
+      <div class="pub-list">
+
+        <div class="pub-card">
+          <div class="pub-num">[8]</div>
+          <div>
+            <div class="pub-title">Equilibrium melting probabilities of a DNA molecule with a defect: An exact solution of the Poland–Scheraga model</div>
+            <div class="pub-authors">Genthon A., <strong>Dvirnas A.</strong>, Ambjörnsson T.</div>
+            <div class="pub-journal">The Journal of Chemical Physics, 159(14)</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1063/5.0168685" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[9]</div>
+          <div>
+            <div class="pub-title">Strain-level bacterial typing directly from patient samples using optical DNA mapping</div>
+            <div class="pub-authors">Nyblom M., Johnning A., Frykholm K., Wrande M., Müller V., Goyal G., Robertsson M., <strong>Dvirnas A.</strong>, Sewunet T., Kök S., Ambjörnsson T.</div>
+            <div class="pub-journal">Communications Medicine, 3(1):31</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1038/s43856-023-00257-3" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="year-group">
+      <div class="year-heading">2021</div>
+      <div class="pub-list">
+
+        <div class="pub-card important">
+          <div class="pub-num">[10]</div>
+          <div>
+            <div class="pub-title">Detection of structural variations in densely-labelled optical DNA barcodes: A hidden Markov model approach</div>
+            <div class="pub-authors"><strong>Dvirnas A.</strong>, Stewart C., Müller V., Bikkarolla S.K., Frykholm K., Sandegren L., Kristiansson E., Westerlund F., Ambjörnsson T.</div>
+            <div class="pub-journal">PLOS ONE, 16(11): e0259670</div>
+            <div class="pub-badges"><span class="badge badge-star">★ Top 5</span></div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1371/journal.pone.0259670" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="year-group">
+      <div class="year-heading">2020</div>
+      <div class="pub-list">
+
+        <div class="pub-card">
+          <div class="pub-num">[11]</div>
+          <div>
+            <div class="pub-title">Cultivation-free typing of bacteria using optical DNA mapping</div>
+            <div class="pub-authors">Müller V., Nyblom M., Johnning A., Wrande M., <strong>Dvirnas A.</strong>, Kök S., Giske C.G., Ambjörnsson T., Sandegren L., Kristiansson E., Westerlund F.</div>
+            <div class="pub-journal">ACS Infectious Diseases, 6(5):1076–1084</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1021/acsinfecdis.9b00464" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2019 -->
+    <div class="year-group">
+      <div class="year-heading">2019</div>
+      <div class="pub-list">
+
+        <div class="pub-card important">
+          <div class="pub-num">[12]</div>
+          <div>
+            <div class="pub-title">Enzyme-free optical DNA mapping of the human genome using competitive binding</div>
+            <div class="pub-authors">Müller V., <strong>Dvirnas A.</strong>, Andersson J., Singh V., Kök S., Johansson P., Ebenstein Y., Ambjörnsson T., Westerlund F.</div>
+            <div class="pub-journal">Nucleic Acids Research, 47(15): e89</div>
+            <div class="pub-badges"><span class="badge badge-star">★ Top 5</span></div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1093/nar/gkz489" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-num">[13]</div>
+          <div>
+            <div class="pub-title">Optical DNA mapping combined with Cas9-targeted resistance gene identification for rapid tracking of resistance plasmids in a neonatal intensive care unit outbreak</div>
+            <div class="pub-authors">Bikkarolla S.K., Nordberg V., Rajer F., Müller V., Kabir M.H., Kök S., <strong>Dvirnas A.</strong>, Ambjörnsson T., Giske C.G., Navér L., Sandegren L.</div>
+            <div class="pub-journal">mBio, 10(4): e00347-19</div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1128/mBio.00347-19" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2018 -->
+    <div class="year-group">
+      <div class="year-heading">2018</div>
+      <div class="pub-list">
+
+        <div class="pub-card important">
+          <div class="pub-num">[14]</div>
+          <div>
+            <div class="pub-title">Facilitated sequence assembly using densely labeled optical DNA barcodes: A combinatorial auction approach</div>
+            <div class="pub-authors"><strong>Dvirnas A.</strong>, Pichler C., Stewart C.L., Quaderi S., Nyberg L.K., Müller V., Kumar Bikkarolla S., Kristiansson E., Sandegren L., Westerlund F., Ambjörnsson T.</div>
+            <div class="pub-journal">PLOS ONE, 13(3): e0193900</div>
+            <div class="pub-badges"><span class="badge badge-star">★ Top 5</span></div>
+            <div class="pub-links">
+              <a href="https://doi.org/10.1371/journal.pone.0193900" target="_blank" rel="noopener noreferrer" class="pub-link">🔗 DOI</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PhD THESIS -->
+    <div class="year-group">
+      <div class="year-heading">PhD Thesis</div>
+      <div class="pub-list">
+        <div class="pub-card thesis">
+          <div class="pub-num" style="color:var(--acc2);">&#x1F4D8;</div>
+          <div>
+            <div class="pub-title">Methods for barcode analysis in optical DNA mapping</div>
+            <div class="pub-authors"><strong>Dvirnas A.</strong></div>
+            <div class="pub-journal">Lund University &nbsp;&middot;&nbsp; ISBN: 978-91-8039-125-2 &nbsp;&middot;&nbsp; Defended 25 Jan 2022</div>
+            <div class="pub-links">
+              <a href="https://portal.research.lu.se/files/110913095/Albertas_Dvirnas_WEBB.pdf" target="_blank" rel="noopener noreferrer" class="pub-link">📄 PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <footer>&copy; 2026 Albertas Dvirnas &nbsp;&middot;&nbsp; Umeå, Sweden</footer>
 
 <script>
-  (function(){const s=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);updateBtn(s);})();
   function updateBtn(t){const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';}
   function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updateBtn(n);}
   function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
