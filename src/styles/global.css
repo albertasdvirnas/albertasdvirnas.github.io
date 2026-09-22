@@ -1,7 +1,8 @@
 /*
  * Site-wide design system, lifted from the Claude Design report
  * "Empirical dynamic modelling: what the attractor can and cannot tell you".
- * Instrument Serif for display, Source Serif 4 for reading, IBM Plex Mono for labels;
+ * Source Serif 4 throughout (display optical size for headings — the design's Instrument Serif
+ * read as too condensed), IBM Plex Mono for labels;
  * warm paper, near-black ink, terracotta accent, a single cool blue for asides.
  */
 
@@ -22,7 +23,7 @@
   --link-hover: oklch(0.38 0.14 35);
   --blue: oklch(0.52 0.13 215);
 
-  --serif-display: 'Instrument Serif', Georgia, serif;
+  --serif-display: 'Source Serif 4', Georgia, serif;  /* optical sizing picks the display cut at large sizes */
   --serif: 'Source Serif 4', Georgia, serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
 
@@ -114,8 +115,8 @@ h1, h2, h3 { text-wrap: balance; }
 .meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .display {
   font-family: var(--serif-display); font-weight: 400;
-  font-size: clamp(42px, 7vw, 82px); line-height: 0.95;
-  letter-spacing: -0.015em; margin: 0 0 20px;
+  font-size: clamp(36px, 5.4vw, 64px); line-height: 1.04;
+  letter-spacing: -0.02em; margin: 0 0 20px;
 }
 .dek {
   font-size: clamp(18px, 2.2vw, 22px); line-height: 1.45;
@@ -159,7 +160,7 @@ h1, h2, h3 { text-wrap: balance; }
 .numbered .sec-num::before { counter-increment: sec; content: "§" counter(sec); }
 .sec-head h2, .h2 {
   font-family: var(--serif-display); font-weight: 400;
-  font-size: clamp(28px, 4vw, 40px); line-height: 1.05; margin: 0;
+  font-size: clamp(25px, 3.2vw, 33px); line-height: 1.12; margin: 0; letter-spacing: -0.01em;
 }
 .sec-head .sec-aside { margin-left: auto; }
 
@@ -206,8 +207,8 @@ h1, h2, h3 { text-wrap: balance; }
 /* Blue-ruled asides: open problems, equations */
 .aside-blue { border-left: 3px solid var(--blue); padding-left: 18px; }
 .aside-blue h3 {
-  font-family: var(--serif-display); font-weight: 400; font-size: 23px;
-  margin: 0 0 8px; line-height: 1.15;
+  font-family: var(--serif-display); font-weight: 400; font-size: 20px;
+  margin: 0 0 8px; line-height: 1.2;
 }
 .aside-blue p { margin: 0; font-size: 15.5px; }
 .equations {
@@ -241,7 +242,7 @@ h1, h2, h3 { text-wrap: balance; }
 .prose > h2 {
   display: flex; align-items: baseline; gap: 16px;
   font-family: var(--serif-display); font-weight: 400;
-  font-size: clamp(28px, 4vw, 40px); line-height: 1.05; margin: 52px 0 18px;
+  font-size: clamp(25px, 3.2vw, 33px); line-height: 1.12; margin: 52px 0 18px; letter-spacing: -0.01em;
 }
 .prose > h2::before {
   counter-increment: sec; content: "§" counter(sec);
@@ -263,7 +264,7 @@ h1, h2, h3 { text-wrap: balance; }
   padding-top: 14px; padding-bottom: 14px;
 }
 .brand {
-  font-family: var(--serif-display); font-size: 26px; line-height: 1; color: var(--ink);
+  font-family: var(--serif-display); font-size: 21px; line-height: 1; color: var(--ink); font-weight: 600;
   border: 0; letter-spacing: -0.01em;
 }
 .brand:hover { color: var(--accent); }
@@ -313,8 +314,8 @@ h1, h2, h3 { text-wrap: balance; }
 .review-card:hover { color: var(--ink); }
 .review-card:hover .review-card__title { color: var(--accent); }
 .review-card__title {
-  font-family: var(--serif-display); font-weight: 400; font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.02; margin: 8px 0 12px; letter-spacing: -0.01em;
+  font-family: var(--serif-display); font-weight: 400; font-size: clamp(25px, 3.2vw, 34px);
+  line-height: 1.12; margin: 8px 0 12px; letter-spacing: -0.01em;
 }
 .review-card p { margin: 0; color: var(--ink-2); max-width: 70ch; }
 
@@ -346,4 +347,4 @@ h1, h2, h3 { text-wrap: balance; }
 .grid li, .cards li { margin-bottom: 6px; }
 .review-body > :first-child:not(.strip) { margin-top: 44px; }
 .review-foot { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); }
-.strip p.stat { font-family: var(--serif-display); font-size: clamp(44px, 6vw, 64px); line-height: 1; }
+.strip p.stat { font-family: var(--serif-display); font-size: clamp(38px, 5vw, 52px); line-height: 1; letter-spacing: -0.02em; }

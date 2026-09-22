@@ -14,7 +14,7 @@ import { projects } from '../data/projects';
     {projects.map((p) => (
       <div>
         <div class="label" style="margin-bottom: 8px">{p.code}</div>
-        <h2 class="h2" style="font-size: 28px; margin-bottom: 10px">{p.name}</h2>
+        <h2 class="h2" style="font-size: 23px; margin-bottom: 10px">{p.name}</h2>
         <p>{p.desc}</p>
         <div class="entry__links" style="margin: 0 0 6px">{p.links.map((l) => <a href={l.href}>{l.label}</a>)}</div>
         <div>{p.tags.map((t) => <span class="tag">{t}</span>)}</div>

@@ -97,7 +97,7 @@ const recentTalks = talks.slice(0, 4);
         {recentTalks.map((t) => (
           <div>
             <div class="label" style="margin-bottom: 8px">{monthLabel(t.date)} · {t.kind}</div>
-            <h3 class="mono-h" style="text-transform: none; letter-spacing: 0; font-family: var(--serif-display); font-size: 23px; font-weight: 400; line-height: 1.15">{t.title}</h3>
+            <h3 class="mono-h" style="text-transform: none; letter-spacing: 0; font-family: var(--serif-display); font-size: 20px; font-weight: 400; line-height: 1.2">{t.title}</h3>
             <p class="small" style="color: var(--ink-2)">{t.venue}{t.slides && <> · <a href={t.slides}>slides</a></>}</p>
           </div>
         ))}
