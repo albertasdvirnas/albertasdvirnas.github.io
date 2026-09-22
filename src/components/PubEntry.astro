@@ -1,0 +1,31 @@
+---
+import type { Pub } from '../data/publications';
+interface Props { pub: Pub; n?: number }
+const { pub, n } = Astro.props;
+// Highlight the author's own name wherever it sits in the author list.
+const authors = pub.authors.replace(/Dvirnas A\./g, '<span class="me">Dvirnas A.</span>');
+const key = n != null ? `[${n}]` : pub.year === 'thesis' ? 'Thesis' : pub.year === 'in-prep' ? '•' : String(pub.year);
+---
+<li class="entry">
+  <div class="entry__key">{key}</div>
+  <div class="entry__body">
+    <h3 class="entry__title">
+      {pub.doi ? <a href={`https://doi.org/${pub.doi}`} set:html={pub.title} /> : <span set:html={pub.title} />}
+    </h3>
+    <p class="entry__sub" set:html={authors} />
+    {pub.venue && <p class="entry__sub"><em>{pub.venue}</em></p>}
+    {(pub.status || pub.top5 || pub.postPhd) && (
+      <div>
+        {pub.status && <span class="tag">{pub.status}</span>}
+        {pub.top5 && <span class="tag tag--accent">Top five</span>}
+        {pub.postPhd && <span class="tag tag--accent">Key post-PhD paper</span>}
+      </div>
+    )}
+    {(pub.doi || pub.links?.length) && (
+      <div class="entry__links">
+        {pub.doi && <a href={`https://doi.org/${pub.doi}`}>DOI</a>}
+        {pub.links?.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+    )}
+  </div>
+</li>

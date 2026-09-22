@@ -1,0 +1,11 @@
+---
+/** Masthead for section pages: kicker strip, display title, dek. */
+interface Props { kicker: string; aside?: string; title: string; dek?: string }
+const { kicker, aside, title, dek } = Astro.props;
+---
+<header class="masthead" style="margin-bottom: 44px">
+  <div class="masthead__strip kicker"><span>{kicker}</span>{aside && <span>{aside}</span>}</div>
+  <h1 class="display">{title}</h1>
+  {dek && <p class="dek" set:html={dek} />}
+  <slot />
+</header>

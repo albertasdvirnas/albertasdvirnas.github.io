@@ -1,0 +1,17 @@
+---
+/**
+ * A numbered review section. The § number is automatic.
+ * variant: 'plain' | 'panel' (shaded, heavy top rule) | 'ruled' (heavy top rule)
+ * cols: flow the body text in two newspaper columns.
+ */
+interface Props { title: string; variant?: 'plain' | 'panel' | 'ruled'; cols?: boolean; id?: string }
+const { title, variant = 'plain', cols = false, id } = Astro.props;
+const slug = id ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+<section id={slug} class:list={['sec', { 'sec--panel': variant === 'panel', 'sec--ruled': variant === 'ruled' }]}>
+  <div class="sec-head">
+    <span class="sec-num"></span>
+    <h2>{title}</h2>
+  </div>
+  {cols ? <div class="cols-2"><slot /></div> : <slot />}
+</section>

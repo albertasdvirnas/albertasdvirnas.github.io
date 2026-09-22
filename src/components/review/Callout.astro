@@ -1,0 +1,8 @@
+---
+/** Closing paragraph with a hairline above it, as in the design's "What survives". */
+interface Props { title?: string }
+const { title } = Astro.props;
+---
+<p class="small" style="max-width: 64ch; margin: 24px 0 0; border-top: 1px solid var(--rule); padding-top: 18px">
+  {title && <strong>{title} </strong>}<slot />
+</p>

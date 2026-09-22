@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { apps } from '../data/apps';
+import { monthLabel } from '../data/talks';
+---
+<Base title="Lab" description="Standalone apps, demos and notebooks hosted alongside Albertas Dvirnas's site.">
+  <PageHead
+    kicker="Hosted here"
+    aside={`${apps.length} ${apps.length === 1 ? 'item' : 'items'}`}
+    title="Lab"
+    dek="Interactive demos, small apps, notebooks and slide decks that live under this site but keep their own design."
+  />
+  {apps.length ? (
+    <ol class="entry-list">
+      {apps.map((a) => (
+        <li class="entry">
+          <div class="entry__key">{a.kind}{a.date && <> · {monthLabel(a.date)}</>}</div>
+          <div class="entry__body">
+            <h2 class="entry__title"><a href={a.href}>{a.title}</a></h2>
+            <p class="entry__sub">{a.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="lead" style="color: var(--ink-2)">Nothing hosted yet — the first demos are on their way.</p>
+  )}
+</Base>

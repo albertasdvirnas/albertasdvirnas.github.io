@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import PubEntry from '../components/PubEntry.astro';
+import { site, links } from '../data/site';
+import { publications } from '../data/publications';
+import { talks, monthLabel } from '../data/talks';
+import { getReviews, fmtDate } from '../lib/reviews';
+
+const reviews = await getReviews();
+const latest = reviews[0];
+const selected = publications.filter((p) => p.top5);
+const recentTalks = talks.slice(0, 4);
+---
+<Base>
+  <div class="numbered">
+    <header class="masthead">
+      <div class="masthead__strip kicker">
+        <span>Postdoctoral researcher · applied mathematics</span>
+        <span>Umeå University, Sweden</span>
+      </div>
+      <h1 class="display">{site.name}</h1>
+      <p class="dek">
+        I develop mathematical and computational methods for time series analysis, bridging applied
+        mathematics with scientific fields ranging from biophysics to ecology.
+      </p>
+    </header>
+
+    <section class="strip" aria-label="At a glance">
+      <div>
+        <div class="label">Position</div>
+        <p>Postdoc, <a href="https://www.umu.se/en/staff/albertas-dvirnas/">Department of Mathematics and Mathematical Statistics</a>, Umeå University.</p>
+      </div>
+      <div>
+        <div class="label">Focus</div>
+        <p>Forecasting and causal structure in short, noisy ecological series: delay embeddings, matrix profiles, diffusion maps.</p>
+      </div>
+      <div>
+        <div class="label">Trained</div>
+        <p>PhD, Lund University (2022): barcode analysis algorithms for optical DNA mapping.</p>
+      </div>
+      <div>
+        <div class="label">Latest review</div>
+        <p>{latest ? <a href={`/reviews/${latest.id}.html`}>{latest.data.title}</a> : 'Coming soon.'}</p>
+      </div>
+    </section>
+
+    <section class="sec" id="about">
+      <div class="sec-head"><span class="sec-num"></span><h2>About</h2></div>
+      <div class="split">
+        <div class="flow">
+          <p>I am a postdoctoral researcher at the <strong>Department of Mathematics and Mathematical Statistics, Umeå University</strong>. My work sits at the intersection of applied mathematics, statistical modelling and data-driven science — developing new methods for time series analysis and applying them across disciplines.</p>
+          <p>The aim is methods that close the gap between mathematics and real scientific questions. That has taken me to <strong>biophysics</strong> — single-molecule imaging and optical DNA mapping — and to <strong>ecology</strong>, where environmental DNA and other complex temporal data demand rigorous mathematical treatment.</p>
+          <p>I completed my PhD at <strong>Lund University</strong> (2022) with <a href="https://www.cec.lu.se/tobias-ambjornsson">Prof. Tobias Ambjörnsson</a> in the Computational Biology and Biological Physics group, developing barcode analysis algorithms for optical DNA mapping. During the PhD I also worked as in-lab theoretician in <a href="https://www.chalmers.se/en/departments/life/research/molecular-bioscience/westerlund-lab/">Fredrik Westerlund's lab</a> at Chalmers University of Technology.</p>
+          <div>
+            {['Time series analysis', 'Empirical dynamic modelling', 'Matrix profiles', 'Hidden Markov models', 'Optical DNA mapping', 'Signal processing', 'Python', 'MATLAB'].map((t) => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+        <figure class="figure" style="padding: 12px">
+          <img class="portrait" src="/images/portrait.jpg" alt="Portrait of Albertas Dvirnas" width="480" height="600" />
+          <figcaption style="margin: 12px 0 0">Albertas Dvirnas · Umeå</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec sec--ruled" id="reviews">
+      <div class="sec-head">
+        <span class="sec-num"></span><h2>Research reviews</h2>
+        <a class="sec-aside kicker bare" href="/reviews.html">All reviews →</a>
+      </div>
+      <div style="border-top: 1px solid var(--ink)">
+        {reviews.slice(0, 3).map((r) => (
+          <a class="review-card" href={`/reviews/${r.id}.html`}>
+            <div class="kicker">{r.data.kicker} · {fmtDate(r.data.date)}</div>
+            <h3 class="review-card__title">{r.data.title}</h3>
+            <p>{r.data.dek}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="publications">
+      <div class="sec-head">
+        <span class="sec-num"></span><h2>Selected publications</h2>
+        <a class="sec-aside kicker bare" href="/publications.html">All publications →</a>
+      </div>
+      <ol class="entry-list">
+        {selected.map((p) => <PubEntry pub={p} />)}
+      </ol>
+    </section>
+
+    <section class="sec sec--panel" id="talks">
+      <div class="sec-head">
+        <span class="sec-num"></span><h2>Recent talks</h2>
+        <a class="sec-aside kicker bare" href="/talks.html">All talks →</a>
+      </div>
+      <div class="grid" style="--min: 230px">
+        {recentTalks.map((t) => (
+          <div>
+            <div class="label" style="margin-bottom: 8px">{monthLabel(t.date)} · {t.kind}</div>
+            <h3 class="mono-h" style="text-transform: none; letter-spacing: 0; font-family: var(--serif-display); font-size: 23px; font-weight: 400; line-height: 1.15">{t.title}</h3>
+            <p class="small" style="color: var(--ink-2)">{t.venue}{t.slides && <> · <a href={t.slides}>slides</a></>}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="contact">
+      <div class="sec-head"><span class="sec-num"></span><h2>Get in touch</h2></div>
+      <p class="lead">For collaborations, questions about the research, thesis supervision, or just to say hello.</p>
+      <div class="rows">
+        {links.map((l) => (
+          <div><div class="row-key">{l.label}</div><div class="row-val"><a href={l.href}>{l.text}</a></div></div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

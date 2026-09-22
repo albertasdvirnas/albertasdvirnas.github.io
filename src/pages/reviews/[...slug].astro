@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getReviews, fmtDate, type Review } from '../../lib/reviews';
+
+export async function getStaticPaths() {
+  const reviews = await getReviews();
+  return reviews.map((review, i) => ({
+    params: { slug: review.id },
+    props: { review, newer: reviews[i - 1], older: reviews[i + 1] },
+  }));
+}
+
+interface Props { review: Review; newer?: Review; older?: Review }
+const { review, newer, older } = Astro.props;
+const { Content } = await render(review);
+const d = review.data;
+---
+<Base title={d.title} description={d.dek} ogType="article">
+  <article class="numbered">
+    <header class="masthead">
+      <div class="masthead__strip kicker">
+        <span>{d.kicker}</span>
+        <span>
+          Compiled {fmtDate(d.date)}
+          {d.updated && <> · updated {fmtDate(d.updated)}</>}
+          {d.draft && <> · draft</>}
+        </span>
+      </div>
+      <h1 class="display">{d.title}</h1>
+      <p class="dek">{d.dek}</p>
+      {d.assisted && (
+        <p class="meta" style="margin: 18px 0 0">
+          Compiled with Claude from the cited literature; selection, checking and opinions by Albertas Dvirnas.
+        </p>
+      )}
+    </header>
+
+    <div class="prose review-body">
+      <Content />
+    </div>
+
+    <nav class="review-foot kicker" aria-label="More reviews">
+      <a href="/reviews.html">← All reviews</a>
+      <span>
+        {newer && <a href={`/reviews/${newer.id}.html`}>Newer: {newer.data.title}</a>}
+        {newer && older && ' · '}
+        {older && <a href={`/reviews/${older.id}.html`}>Older: {older.data.title}</a>}
+      </span>
+    </nav>
+  </article>
+</Base>

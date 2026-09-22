@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { talks, monthLabel } from '../data/talks';
+
+const years = [...new Set(talks.map((t) => t.date.slice(0, 4)))];
+---
+<Base title="Talks" description="Conference presentations, invited seminars and workshop contributions by Albertas Dvirnas.">
+  <PageHead kicker="Presentations" aside={`${talks.length} talks`} title="Talks & conferences" dek="Conference presentations, invited seminars and workshop contributions." />
+  {years.map((y) => (
+    <section class="sec">
+      <div class="sec-head"><h2>{y}</h2></div>
+      <ol class="entry-list">
+        {talks.filter((t) => t.date.startsWith(y)).map((t) => (
+          <li class="entry">
+            <div class="entry__key">{monthLabel(t.date)}</div>
+            <div class="entry__body">
+              <h3 class="entry__title">{t.title}</h3>
+              <p class="entry__sub">{t.venue}</p>
+              <div>
+                <span class:list={['tag', { 'tag--accent': t.kind === 'Invited' }]}>{t.kind}</span>
+                {t.slides && <span class="entry__links" style="display: inline-flex; margin-left: 8px"><a href={t.slides}>Slides (PDF)</a></span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+</Base>

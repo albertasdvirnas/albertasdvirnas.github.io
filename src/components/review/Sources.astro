@@ -1,0 +1,10 @@
+---
+/** Bibliography block closing a review. Put one <p> per reference inside. */
+interface Props { title?: string; note?: string }
+const { title = 'Sources', note } = Astro.props;
+---
+<section class="sec--ruled" id="sources">
+  <h2 class="mono-h" style="letter-spacing: 0.16em; margin-bottom: 20px">{title}</h2>
+  <div class="sources"><slot /></div>
+  {note && <p class="caption" style="margin: 22px 0 0; max-width: 70ch" set:html={note} />}
+</section>

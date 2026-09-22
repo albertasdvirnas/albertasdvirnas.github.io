@@ -1,0 +1,9 @@
+---
+interface Props { n: number | string; label?: string }
+const { n, label = 'Takeaway' } = Astro.props;
+const num = typeof n === 'number' ? String(n).padStart(2, '0') : n;
+---
+<div>
+  <div class="label">{label} {num}</div>
+  <p><slot /></p>
+</div>

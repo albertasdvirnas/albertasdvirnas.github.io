@@ -1,0 +1,13 @@
+export { default as Takeaways } from './Takeaways.astro';
+export { default as Takeaway } from './Takeaway.astro';
+export { default as Section } from './Section.astro';
+export { default as Grid } from './Grid.astro';
+export { default as Card } from './Card.astro';
+export { default as Split } from './Split.astro';
+export { default as BarFigure } from './BarFigure.astro';
+export { default as Equations } from './Equations.astro';
+export { default as Rows } from './Rows.astro';
+export { default as Row } from './Row.astro';
+export { default as Problem } from './Problem.astro';
+export { default as Sources } from './Sources.astro';
+export { default as Callout } from './Callout.astro';

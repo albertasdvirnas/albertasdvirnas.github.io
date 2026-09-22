@@ -1,0 +1,221 @@
+---
+title: "Empirical dynamic modelling: what the attractor can and cannot tell you"
+dek: "A survey of delay-embedding methods — simplex, S‑map, convergent cross mapping — their theoretical warrant, their measured failure modes, and the open problems worth a proposal. Evidence drawn primarily from ecology and fisheries."
+kicker: "Research review · nonlinear time-series methods"
+date: 2026-09-22
+tags: [EDM, causal inference, forecasting, fisheries]
+assisted: true
+---
+import { Takeaways, Takeaway, Section, Grid, Card, Split, BarFigure, Equations, Rows, Row, Problem, Sources, Callout } from '../../components/review';
+
+<Takeaways>
+  <Takeaway n={1}>The forecasting side of EDM is on firm ground and is now producing management-grade numbers: a Gaussian-process EDM gave leave-one-out *R²* = 0.71 for Gulf of Mexico brown shrimp and a defensible MSY estimate.</Takeaway>
+  <Takeaway n={2}>The causal-inference side is contested. Under seasonal forcing and synchrony, the original CCM convergence criterion produced false positives in **every** non-interacting replicate of a simulated two-strain epidemic system.</Takeaway>
+  <Takeaway n={3}>EDM's headline claim — that nonlinearity defeats linear methods — does not survive benchmarking. Linear Granger causality matched CCM on chaotic and networked ecological simulations.</Takeaway>
+  <Takeaway n={4}>The live research frontier is statistical, not topological: putting embedding, process noise and observation noise inside one probabilistic model rather than choosing them by grid search.</Takeaway>
+</Takeaways>
+
+<Section title="The premise: attractors instead of equations" cols>
+
+EDM begins from a refusal. Where classical mathematical modelling posits parametric equations and fits them, EDM treats the equations as unavailable and works directly in the state space the data imply. The Sugihara lab's own framing is that [these methods "operate with minimal assumptions"](https://deepeco.ucsd.edu/nonlinear-dynamics-research/edm/) and therefore suit systems with non-equilibrium, state-dependent dynamics, where interaction strengths themselves change with the state of the system.
+
+The mathematical licence is Takens' embedding theorem (1981), generalised by [Deyle & Sugihara (2011)](https://doi.org/10.1371/journal.pone.0018295) and by Sauer, Yorke & Casdagli's embedology. Under broad conditions there is a one-to-one, topology-preserving correspondence between the attractor reconstructed from lags of a single observable and the attractor in the true state space. Lags stand in for the unmeasured variables.
+
+The practical consequence for applied work is the one that makes EDM attractive in ecology: you can recover system-level structure from an incomplete observation set. As [Munch, Rogers & Sugihara (2023)](https://doi.org/10.1111/2041-210X.13983) put it in their review, EDM "circumvents the need for a parametric model and complete observations of all system variables" — the binding constraint in sparsely observed ecosystems.
+
+The motivating pathology is the *mirage correlation*: two nonlinearly coupled variables can show positive, negative, then vanishing correlation over different stretches of the same series. Correlation-based analysis reports instability; the state-space view reports a fixed rule operating at different points on the manifold.
+
+</Section>
+
+<Section title="The algorithm family, in one page">
+
+<p class="lead" style="max-width: 62ch; margin-bottom: 26px">Four primitives carry nearly all applied EDM work. Each is a different answer to the question “given a point in the reconstructed state space, what happens next?”</p>
+
+<Grid variant="cards" min={250}>
+  <Card title="Simplex projection" note="Diagnostic use: choose E.">
+
+Sugihara & May (1990). Locate the *E*+1 nearest neighbours of the current delay vector and predict the weighted average of where they went. Prediction skill decaying with forecast horizon is the classic signature separating low-dimensional chaos from measurement error.
+
+  </Card>
+  <Card title="S‑map" note="Diagnostic use: quantify nonlinearity.">
+
+Sugihara (1994). Replace the neighbour average with a locally weighted linear regression, localisation controlled by θ. Skill improving as θ rises above zero *is* the test for state dependence. The fitted coefficients approximate the Jacobian, i.e. time-varying interaction strengths.
+
+  </Card>
+  <Card title="Multivariate & multiview embedding" note="Use: short series, many variables.">
+
+Dixon et al. (1999); [Ye & Sugihara (2016)](https://doi.org/10.1126/science.aag0863). Lags are not the only admissible coordinates: other observables work too. Multiview searches combinations of candidate coordinate sets and averages the best, trading the curse of dimensionality for a combinatorial search.
+
+  </Card>
+  <Card title="Convergent cross mapping" note="Use: causal inference — contested; see §4." noteAccent>
+
+Sugihara et al., *Science* (2012). If *X* drives *Y*, the signature of *X* is embedded in *Y*, so neighbours on *M<sub>Y</sub>* should predict *X* — and predict it better as the library grows. Convergence of cross-map skill ρ(*L*), not its level, is the claimed evidence of causation.
+
+  </Card>
+</Grid>
+
+<Equations>
+  <div>delay vector&nbsp;&nbsp;x<sub>t</sub> = ( X<sub>t</sub>, X<sub>t−τ</sub>, …, X<sub>t−(E−1)τ</sub> ) ∈ ℝ<sup>E</sup></div>
+  <div>simplex&nbsp;&nbsp;X̂<sub>t+T<sub>p</sub></sub> = ∑<sub>i</sub> w<sub>i</sub> X<sub>N<sub>i</sub>+T<sub>p</sub></sub>,&nbsp;&nbsp;w<sub>i</sub> ∝ exp(−d<sub>i</sub>/d<sub>1</sub>)</div>
+  <div>S‑map weights&nbsp;&nbsp;w<sub>i</sub> = exp(−θ d<sub>i</sub> / d̄),&nbsp;&nbsp;θ = 0 ⇒ global linear model</div>
+  <div>CCM test&nbsp;&nbsp;ρ(L) ↑ and saturates as L → L<sub>max</sub> ⇒ evidence that X causes Y</div>
+</Equations>
+
+</Section>
+
+<Section title="Where it works: the fisheries record">
+
+<Split>
+
+Fisheries is the domain where EDM has accumulated the most out-of-sample evidence, because the systems are short-lived, environmentally forced and badly served by age-structured assessment. Tsai and colleagues list the forecasting record: North Pacific albacore (2011), Pacific sardine (2013), Fraser River sockeye (2015), Gulf and Atlantic menhaden (2018), Atlantic blue crab (2020), Gulf penaeid shrimp (2023).
+
+The 2024 [ICES study by Tsai, Munch, Masi & Stevens](https://doi.org/10.1093/icesjms/fsae080) is the strongest recent case, because it crosses the line from forecasting into reference points. Using Gaussian-process EDM on 30+ years of brown shrimp landings and SEAMAP survey CPUE, the selected model (E&nbsp;=&nbsp;4, Type‑I log-difference) reached leave-one-out *R²* = 0.71, RMSE 0.206; walk-forward simulation under constant harvest rates gave MSY ≈ 225.4 ± 3.5 million pounds of tails at a harvest rate near 0.72.
+
+Two details matter more than the headline number. First, the lag structure earns its place: predictive *R²* collapses to 0.1 at E&nbsp;=&nbsp;1 — the case that reduces to a conventional single-lag production model. Second, adding ecologically obvious covariates (recruitment, rainfall) did *not* improve skill, which the authors read as their influence already being carried in the lagged CPUE and catch.
+
+Context for the number: the EDM MSY sits above previous production-model (≈88M lb) and stock-synthesis (≈147M lb) estimates — same order of magnitude, meaningfully different advice. That spread is the honest measure of structural uncertainty in this fishery, not a vindication of any one method.
+
+<BarFigure
+  slot="aside"
+  caption="Out-of-sample skill vs. embedding dimension<br>Gulf of Mexico brown shrimp, LOO <em>R²</em>"
+  bars={[{ label: 'E=3', value: 0.23 }, { label: 'E=4', value: 0.71 }, { label: 'E=5', value: 0.68 }]}
+  note="Type‑I log-difference transform. E&nbsp;=&nbsp;1 is the nonparametric analogue of a classical production model. Source: Tsai et al. 2024, Table&nbsp;1 and Fig.&nbsp;3d."
+/>
+
+</Split>
+
+</Section>
+
+<Section title="Where it fails: the CCM audit" variant="panel">
+
+<p class="lead">The most serious adversarial test of CCM remains [Cobey & Baskerville (2016)](https://doi.org/10.1371/journal.pone.0169050), who simulated two pathogen strains with known interaction strengths and gave the method every advantage — error-free data, 1000 years of monthly incidence. Their findings are specific and reproducible, and they have not been refuted so much as absorbed as folk practice.</p>
+
+<Grid min={240}>
+  <Card title="Shared periodicity" accent>
+
+Under the convergence criterion, whenever strains oscillated at similar frequencies the method inferred interactions that did not exist — in the non-interacting cases it "always incorrectly inferred an influence." Seasonality is near-universal in ecology and epidemiology, so this is not an edge case.
+
+  </Card>
+  <Card title="Transients" accent>
+
+With the transmission rate drifting linearly between two values at which CCM had worked perfectly, error rates jumped to 29 false negatives and 44 false positives in 100 replicates. Starting far from the attractor, the true interaction was recovered in only 19 of 100 runs — worse than chance — while a spurious reverse interaction appeared in 21.
+
+  </Card>
+  <Card title="Embedding is not identified" accent>
+
+Four defensible ways of choosing the delay embedding — univariate optimisation, maximising cross-map ρ, random projection, nonuniform delays — gave different answers even near a clean attractor. Applied to historical childhood-infection series, New York and Chicago shared *no* inferred interactions, and switching reconstruction method changed both the set and the direction of links.
+
+  </Card>
+  <Card title="Synchrony and strong forcing" accent>
+
+A separate line of work finds CCM misestimates coupling strength and can invert direction under strong coupling and generalised synchronisation — the regime where the driven variable ceases to be dynamically distinct. Noise, counter-intuitively, can help by breaking that degeneracy.
+
+  </Card>
+</Grid>
+
+<Callout title="What survives.">The lag-based criterion of [Ye et al. (2015)](https://doi.org/10.1038/srep14750) — require cross-map skill to peak at a *negative* lag, so information flows forward in time — removed the periodicity false positives in the same simulations. That criterion, plus surrogate-based significance testing and explicit convergence diagnostics, is the minimum defensible protocol today. Note also the structural critique: because CCM uses future as well as past values to reconstruct the current state, its notion of causality is not the standard one, which motivated "causalised" variants.</Callout>
+
+</Section>
+
+<Section title="Against the alternatives" cols>
+
+**Versus Granger causality.** The sharpest result in the comparative literature is [Barraquand et al. (2021)](https://doi.org/10.1007/s12080-020-00482-7), who benchmarked linear multivariate-autoregressive Granger causality against CCM on predator–prey cycles, deterministic chaotic and stochastic competition, and 10- and 20-species networks. The two "uncover interactions with surprisingly similar performance," with *no* correspondence between how nonlinear the dynamics were and which method won. Their conclusion — that the choice should follow the aims of the analysis, not an appeal to nonlinearity — undercuts the standard motivating argument for CCM. (One caveat carried in commentary on that work: the comparison is threshold-calibrated, so read it as parity rather than a decisive ranking.)
+
+**Versus parametric stock assessment.** Here the case for EDM is strongest where the parametric machinery is least identifiable: short-lived stocks whose assessment timeline exceeds their generation time, and where age-structured data do not exist. Tsai et al. also argue EDM evades Boettiger's "forecast trap" — where selecting among a handful of misspecified parametric models by predictive skill degrades management benchmarks — on the grounds that a nonparametric learner given enough data is not confined to a bad model set. They flag this as a hypothesis warranting more analysis, not a result.
+
+**Versus modern ML system identification.** This is the comparison the literature has *not* properly run, and it is the most consequential gap. SINDy, neural ODEs and reservoir computing all attack the same problem — recovering dynamics from trajectories — with different inductive biases: sparse symbolic libraries, learned vector fields, and random high-dimensional feature dynamics respectively. Each has its own benchmark culture (reservoir computers reach on the order of 13 Lyapunov times of valid prediction on canonical chaotic systems), but head-to-head evaluations against EDM on the short, noisy, non-stationary series that define ecology are scarce. *Inference, not established finding:* EDM's advantage in that regime is most likely a data-efficiency and interpretability advantage rather than a representational one.
+
+</Section>
+
+<Section title="Recent methodological developments">
+
+<p class="lead">The 2023 *Methods in Ecology and Evolution* review is the reference point; the extensions below are the ones that change what problems are reachable.</p>
+
+<Rows>
+  <Row k="Bayesian / GP‑EDM">Gaussian-process regression replaces nearest-neighbour averaging, giving predictive distributions, automatic relevance determination over lags (uninformative lags drop out), and a route to mechanistic priors. This is the variant now used for fishery reference points.</Row>
+  <Row k="Noise-aware S‑map">Regularised S‑map (Cenci, Sugihara & Saavedra 2019) for noisy interaction estimates; the hidden-Markov S‑map (Esguerra & Munch 2024) folds observation error into the forecast rather than assuming perfect measurement.</Row>
+  <Row k="Ragged data">Frameworks for missing or irregularly sampled observations (Johnson & Munch 2022) and for pooling many short series across space (spatial EDM; multispatial CCM) — the single largest practical barrier in field ecology.</Row>
+  <Row k="Control & policy">Empirical dynamic programming (Brias & Munch 2021, 2024) derives state-dependent harvest policies directly from an EDM; [Park, Sugihara & Pao (2024)](https://doi.org/10.1371/journal.pone.0305408) extend generalised embedding to control of complex systems. This is EDM moving from description to intervention — where the causal-inference caveats bite hardest.</Row>
+  <Row k="Hybrids">Deyle et al. (PNAS 2022) combine a parametric physical model with empirical components for Lake Geneva water quality under non-stationary futures — arguably the most promising direction, since it restores extrapolation ability that pure EDM lacks.</Row>
+  <Row k="Beyond time">Geographical CCM (*Nature Communications*, 2023) applies cross-mapping to spatial cross-sectional data where no usable time series exists — a genuine extension of the embedding idea rather than a tuning of it.</Row>
+</Rows>
+
+</Section>
+
+<Section title="Practice: data, software, protocol">
+
+<Grid min={260} gap={32}>
+  <Card title="How much data">
+
+Two working rules from the fisheries literature: feasible embedding dimension *E* ≤ √<span style="border-top: 1px solid currentColor; padding-top: 1px">N</span> for a series of length *N*; and the series should span several multiples of the generation time. Below that, EDM does not fail loudly — it returns plausible numbers with unquantified bias, which is the more dangerous failure.
+
+A third, softer constraint: the data must cover the attractor. Model-free methods cannot anticipate dynamics in regions of state space they have never visited — the standing objection to EDM under climate non-stationarity.
+
+  </Card>
+  <Card title="Software">
+
+[rEDM](https://cran.r-project.org/package=rEDM) (R) and [pyEDM](https://sugiharalab.github.io/EDM_Documentation/) (Python) are the Sugihara-lab reference implementations, both thin wrappers over the C++ core `cppEDM`. The [edm package for Stata](https://edm-developers.github.io/edm-stata/) (Li, Zyphur, Sugihara & Laub, *Stata Journal* 2021) carries panel-data support and GPU acceleration, with fastEDM ports to R and Python sharing the same C++ backend.
+
+Reproducibility is reasonable by disciplinary standards: recent applied papers ship code and data repositories alongside the analysis.
+
+  </Card>
+  <Card title="A defensible protocol">
+
+1. Establish nonlinearity first (simplex *E*, then S‑map θ &gt; 0) before claiming EDM is warranted at all.
+2. Select on out-of-sample skill (leave-one-out or walk-forward), and report the effective degrees of freedom, not just ρ.
+3. For causal claims, use the negative-lag criterion, test against seasonally matched surrogates, and report sensitivity to the embedding method.
+4. State whether the system plausibly sits on a fixed attractor. If it does not, say so and downgrade the claim.
+
+  </Card>
+</Grid>
+
+</Section>
+
+<Section title="Open problems worth proposing on" variant="ruled">
+
+<Grid min={270} gap={28}>
+  <Problem title="A probabilistic theory of cross-map evidence">Cobey & Baskerville's deepest objection is that the CCM statistics are heuristics without a likelihood: there is no formal justification for the bootstrap tests on ρ. Embedding, process noise and observation noise inside one generative model — GP‑EDM and the hidden-Markov S‑map are first steps — would make cross-map evidence comparable to likelihood-based inference and give calibrated error rates. This is the highest-value open problem for an applied-maths group.</Problem>
+  <Problem title="Detectability theory">There is no sample-complexity result telling a practitioner when a coupling of strength *c* is detectable given series length *N*, noise level η and attractor dimension *D*. Everything in current practice is simulation-calibrated folklore. Even loose bounds would change how these methods are reviewed.</Problem>
+  <Problem title="Non-stationarity and regime shift">Takens presumes a fixed attractor; climate-driven ecosystems do not have one. Sliding-window CCM and hybrid parametric–empirical models are pragmatic patches. A theory of embedding under slowly drifting parameters — and a diagnostic that fires *before* the forecast silently fails — is missing.</Problem>
+  <Problem title="Direct vs. indirect causation at network scale">Cross-map causality is transitive, so in a food web CCM reports the closure of the interaction graph, not the graph. Partial and multivariate cross-mapping variants address three-variable cases; scaling conditional cross-mapping to realistic networks with controlled false-discovery rates is unsolved.</Problem>
+  <Problem title="An honest benchmark suite">Given the Granger result, the field needs a shared benchmark — simulated systems with known ground truth plus curated field data — on which EDM, MAR/Granger, SINDy, neural ODEs and reservoir computing are scored under identical short-and-noisy conditions. No such suite exists; building one is a publishable contribution in itself.</Problem>
+  <Problem title="From forecast to decision">Empirical dynamic programming exists but has been empirically used for harvest control in very few fisheries. Management strategy evaluation comparing EDM/EDP policies against stock-synthesis policies over decadal horizons — underway for Gulf shrimp — is the evidence that would move EDM into routine practice.</Problem>
+</Grid>
+
+</Section>
+
+<Sources note="Method note: figures quoted are as reported in the cited publications on their publication dates; the shrimp MSY and skill statistics are from the 2024 ICES paper and have not been independently re-analysed here. Claims labelled as inference in §5 are the compiler's reading, not findings in the cited sources.">
+
+Sugihara, G. & May, R. (1990). Nonlinear forecasting as a way of distinguishing chaos from measurement error in time series. *Nature* 344, 734–741. [doi:10.1038/344734a0](https://doi.org/10.1038/344734a0)
+
+Takens, F. (1981). Detecting strange attractors in turbulence. *Lecture Notes in Mathematics* 898, 366–381.
+
+Deyle, E. & Sugihara, G. (2011). Generalized theorems for nonlinear state space reconstruction. *PLoS ONE* 6(3): e18295. [doi](https://doi.org/10.1371/journal.pone.0018295)
+
+Sugihara, G. et al. (2012). Detecting causality in complex ecosystems. *Science* 338, 496–500. [doi](https://doi.org/10.1126/science.1227079)
+
+Ye, H., Deyle, E., Gilarranz, L. & Sugihara, G. (2015). Distinguishing time-delayed causal interactions using convergent cross mapping. *Scientific Reports* 5, 14750. [doi](https://doi.org/10.1038/srep14750)
+
+Ye, H. & Sugihara, G. (2016). Information leverage in interconnected ecosystems: overcoming the curse of dimensionality. *Science* 353, 922–925. [doi](https://doi.org/10.1126/science.aag0863)
+
+Cobey, S. & Baskerville, E. (2016). Limits to causal inference with state-space reconstruction for infectious disease. *PLoS ONE* 11(12): e0169050. [doi](https://doi.org/10.1371/journal.pone.0169050)
+
+Barraquand, F., Picoche, C., Detto, M. & Hartig, F. (2021). Inferring species interactions using Granger causality and convergent cross mapping. *Theoretical Ecology* 14, 87–105. [doi](https://doi.org/10.1007/s12080-020-00482-7)
+
+Munch, S., Rogers, T. & Sugihara, G. (2023). Recent developments in empirical dynamic modelling. *Methods in Ecology and Evolution* 14, 732–745. [doi](https://doi.org/10.1111/2041-210X.13983)
+
+Tsai, C.-H., Munch, S., Masi, M. & Stevens, M. (2024). Empirical dynamic modeling for sustainable benchmarks of short-lived species. *ICES Journal of Marine Science* 81. [doi](https://doi.org/10.1093/icesjms/fsae080)
+
+Chang, C.-W., Ushio, M. & Hsieh, C. (2017). Empirical dynamic modeling for beginners. *Ecological Research* 32, 785–796. [doi](https://doi.org/10.1007/s11284-017-1469-9)
+
+Munch, S., Brias, A., Sugihara, G. & Rogers, T. (2020). Frequently asked questions about nonlinear dynamics and empirical dynamic modelling. *ICES JMS* 77, 1463–1479. [doi](https://doi.org/10.1093/icesjms/fsz209)
+
+Li, J., Zyphur, M., Sugihara, G. & Laub, P. (2021). The edm package for empirical dynamic modeling and convergent cross mapping in Stata. *Stata Journal* 21(1), 220–258. [docs](https://edm-developers.github.io/edm-stata/)
+
+Park, J., Sugihara, G. & Pao, G. (2024). Control of complex systems with generalized embedding and empirical dynamic modeling. *PLOS ONE* 19(8): e0305408. [doi](https://doi.org/10.1371/journal.pone.0305408)
+
+Gao, S. et al. (2023). Causal inference from cross-sectional earth system data with geographical convergent cross mapping. *Nature Communications* 14. [doi](https://doi.org/10.1038/s41467-023-41619-6)
+
+Sugihara Lab, Scripps Institution of Oceanography. EDM overview and software. [deepeco.ucsd.edu](https://deepeco.ucsd.edu/nonlinear-dynamics-research/edm/)
+
+</Sources>

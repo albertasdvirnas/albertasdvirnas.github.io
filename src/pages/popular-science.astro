@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { outreach } from '../data/collabs';
+import { monthLabel } from '../data/talks';
+---
+<Base title="Popular science" description="Outreach writing and talks by Albertas Dvirnas for a general audience.">
+  <PageHead kicker="Outreach" title="Popular science" dek="Making research accessible — talks, articles and other outreach for a broader audience." />
+  <ol class="entry-list">
+    {outreach.map((o) => (
+      <li class="entry">
+        <div class="entry__key">{o.kind} · {monthLabel(o.date)}</div>
+        <div class="entry__body">
+          <h2 class="entry__title"><a href={o.href}>{o.title}</a></h2>
+          <p class="entry__sub">{o.desc}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Base>

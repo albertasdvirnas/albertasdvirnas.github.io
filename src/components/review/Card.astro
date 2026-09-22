@@ -1,0 +1,10 @@
+---
+/** A titled block inside <Grid>. `note` renders a mono footnote line; `accent` tints the heading. */
+interface Props { title: string; note?: string; accent?: boolean; noteAccent?: boolean }
+const { title, note, accent = false, noteAccent = false } = Astro.props;
+---
+<div class="small">
+  <h3 class="mono-h" style={accent ? 'color: var(--accent-strong)' : undefined}>{title}</h3>
+  <slot />
+  {note && <p class="meta" style={noteAccent ? 'color: var(--accent)' : undefined}>{note}</p>}
+</div>

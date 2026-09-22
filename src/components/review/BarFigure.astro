@@ -1,0 +1,17 @@
+---
+/** Small horizontal bar chart. Values are drawn relative to `max` (default 1). */
+interface Props { caption: string; bars: { label: string; value: number }[]; max?: number; digits?: number; note?: string }
+const { caption, bars, max = 1, digits = 2, note } = Astro.props;
+---
+<figure class="figure">
+  <figcaption set:html={caption} />
+  {bars.map((b) => (
+    <div class="bar">
+      <span class="bar__k">{b.label}</span>
+      <span class="bar__track"><span class="bar__fill" style={`width:${Math.max(0, Math.min(1, b.value / max)) * 100}%`}></span></span>
+      <span class="bar__v">{b.value.toFixed(digits)}</span>
+    </div>
+  ))}
+  {note && <p class="caption" style="margin: 14px 0 0" set:html={note} />}
+  <slot />
+</figure>

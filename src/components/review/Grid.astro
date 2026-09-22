@@ -1,0 +1,6 @@
+---
+/** Responsive grid. variant 'cards' draws hairline-ruled cells like the design's algorithm table. */
+interface Props { min?: number; gap?: number; variant?: 'open' | 'cards' }
+const { min = 250, gap = 26, variant = 'open' } = Astro.props;
+---
+<div class={variant === 'cards' ? 'cards' : 'grid'} style={`--min:${min}px;--gap:${gap}px`}><slot /></div>

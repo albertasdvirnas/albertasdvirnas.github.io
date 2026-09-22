@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import PubEntry from '../components/PubEntry.astro';
+import { publications, stats } from '../data/publications';
+
+const groups: { label: string; items: typeof publications }[] = [];
+for (const p of publications) {
+  const label = p.year === 'in-prep' ? 'In preparation & submitted' : p.year === 'thesis' ? 'PhD thesis' : String(p.year);
+  const g = groups.find((x) => x.label === label);
+  g ? g.items.push(p) : groups.push({ label, items: [p] });
+}
+// Published papers are numbered newest-first, as on the old site.
+let n = 0;
+const numbered = new Map(publications.filter((p) => typeof p.year === 'number').map((p) => [p, ++n]));
+---
+<Base title="Publications" description="Peer-reviewed articles by Albertas Dvirnas in applied mathematics, computational biology and biophysics.">
+  <PageHead
+    kicker="Peer-reviewed work"
+    aside="Full list on Google Scholar"
+    title="Publications"
+    dek={`Research articles in applied mathematics, computational biology and biophysics. Citation counts on <a href="https://scholar.google.com/citations?user=HAQqTfUAAAAJ&hl=en">Google Scholar</a>.`}
+  />
+
+  <section class="strip" aria-label="Summary">
+    <div><div class="label">Articles</div><p class="stat">{stats.articles}</p></div>
+    <div><div class="label">Citations</div><p class="stat">{stats.citations}</p></div>
+    <div><div class="label">In preparation / submitted</div><p class="stat">{stats.inPrep}</p></div>
+  </section>
+
+  {groups.map((g) => (
+    <section class="sec">
+      <div class="sec-head"><h2>{g.label}</h2></div>
+      <ol class="entry-list">
+        {g.items.map((p) => <PubEntry pub={p} n={numbered.get(p)} />)}
+      </ol>
+    </section>
+  ))}
+</Base>

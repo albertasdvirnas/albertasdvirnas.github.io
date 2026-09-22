@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getReviews, fmtDate } from '../../lib/reviews';
+const reviews = await getReviews();
+---
+<Base title="Research reviews" description="Long-form surveys of methods and literature in time series analysis, dynamical systems and ecology.">
+  <header class="masthead">
+    <div class="masthead__strip kicker">
+      <span>Research reviews</span>
+      <span>{reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}</span>
+    </div>
+    <h1 class="display">Reading the literature, out loud</h1>
+    <p class="dek">Surveys of methods I work with or next to: what the theory licenses, where the evidence is strong, where it fails, and which open problems look worth a proposal. Drafted with Claude, checked and edited by me.</p>
+  </header>
+
+  <div>
+    {reviews.map((r) => (
+      <a class="review-card" href={`/reviews/${r.id}.html`}>
+        <div class="kicker">{r.data.kicker} · {fmtDate(r.data.date)}{r.data.draft && ' · draft'}</div>
+        <h2 class="review-card__title">{r.data.title}</h2>
+        <p>{r.data.dek}</p>
+        <div>{r.data.tags.map((t) => <span class="tag">{t}</span>)}</div>
+      </a>
+    ))}
+  </div>
+</Base>

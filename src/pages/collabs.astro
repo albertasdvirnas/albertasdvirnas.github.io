@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { collabs } from '../data/collabs';
+---
+<Base title="Collaborations" description="Research groups and collaborative projects Albertas Dvirnas contributes to.">
+  <PageHead kicker="Partners & groups" title="Collaborations" dek="Research groups and collaborative projects I contribute to." />
+  <div class="grid" style="--min: 300px; --gap: 28px">
+    {collabs.map((c) => (
+      <div class="aside-blue">
+        <h3>{c.name}</h3>
+        <p>{c.desc}</p>
+        <p class="meta" style="margin-top: 10px"><a href={c.href}>{c.handle} →</a></p>
+      </div>
+    ))}
+  </div>
+</Base>
